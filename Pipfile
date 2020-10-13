@@ -1,0 +1,22 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+django = "*"
+django-tinymce = "*"
+django-imagekit = "*"
+pillow = "*"
+djangorestframework = "*"
+markdown = "*"
+django-filter = "*"
+psycopg2-binary = "*"
+django-cors-headers = "*"
+drf-yasg = "*"
+django-autoslug = "*"
+
+[requires]
+python_version = "3.8"
