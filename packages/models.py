@@ -146,7 +146,9 @@ class Experience(models.Model):
 
 class Package(models.Model):
     title = models.CharField(max_length=255, default='')
-    summary = models.TextField(default='')
+    keywords = models.TextField(default='')
+
+    summary = models.TextField(max_length=350, default='')
     slug = AutoSlugField(
         populate_from='title',
         unique_with=['title'],
@@ -156,7 +158,7 @@ class Package(models.Model):
     description = HTMLField()
 
     package_type = models.ManyToManyField(PackageType)
-    experience = models.ManyToManyField(Experience)
+    #experience = models.ManyToManyField(Experience)
     month = models.ManyToManyField(Month)
 
     specialist = models.ForeignKey(
@@ -202,7 +204,7 @@ class Package(models.Model):
 
     thumbnail = ProcessedImageField(
         upload_to='images/packages-thumbnail/',
-        processors=[ResizeToFill(280, 190)],
+        processors=[ResizeToFill(390, 230)],
         format='JPEG',
         options={'quality': 100}
     )
@@ -231,7 +233,7 @@ class PackageImage(models.Model):
 
     original = ImageSpecField(
         source='image',
-        processors=[ResizeToFill(1400, 500)],
+        processors=[ResizeToFill(1500, 700)],
         format='JPEG',
         options={'quality': 100}
     )
