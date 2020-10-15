@@ -127,7 +127,7 @@ class Experience(models.Model):
 
     original = ImageSpecField(
         source='image',
-        processors=[ResizeToFill(1400, 400)],
+        processors=[ResizeToFill(1500, 800)],
         format='JPEG',
         options={'quality': 98}
     )
@@ -233,7 +233,7 @@ class PackageImage(models.Model):
 
     original = ImageSpecField(
         source='image',
-        processors=[ResizeToFill(1500, 700)],
+        processors=[ResizeToFill(1500, 800)],
         format='JPEG',
         options={'quality': 100}
     )

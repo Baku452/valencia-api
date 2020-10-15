@@ -40,7 +40,7 @@ class ItineraryImage(models.Model):
 
     image = ProcessedImageField(
         upload_to='images/itinerary/',
-        processors=[ResizeToFill(600, 500)],
+        processors=[ResizeToFill(1000, 700)],
         format='JPEG',
         options={'quality': 100}
     )

@@ -39,7 +39,7 @@ class Destination(models.Model):
 
     original = ImageSpecField(
         source='picture',
-        processors=[ResizeToFill(1200, 500)],
+        processors=[ResizeToFill(1500, 800)],
         format='JPEG',
         options={'quality': 80}
     )
@@ -70,7 +70,7 @@ class Banner(models.Model):
 
     image = ProcessedImageField(
         upload_to='images/banner/',
-        processors=[ResizeToFill(1600, 800)],
+        processors=[ResizeToFill(1500, 800)],
         format='JPEG',
         options={'quality': 100}
     )
