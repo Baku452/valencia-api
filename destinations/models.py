@@ -70,7 +70,7 @@ class Banner(models.Model):
 
     image = ProcessedImageField(
         upload_to='images/banner/',
-        processors=[ResizeToFill(1500, 800)],
+        processors=[ResizeToFill(1600, 700)],
         format='JPEG',
         options={'quality': 100}
     )
