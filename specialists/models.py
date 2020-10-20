@@ -1,6 +1,7 @@
 from django.db import models
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
+#from packages.models import PackageType
 
 
 class Specialist(models.Model):
@@ -26,6 +27,9 @@ class Newsletter(models.Model):
     first_name = models.CharField(max_length=255, default='')
     last_name = models.CharField(max_length=255, default='')
     email = models.EmailField(max_length=255, default='')
+
+    package_type = models.ManyToManyField(to='packages.PackageType')
+
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 

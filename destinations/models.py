@@ -3,7 +3,6 @@ from tinymce.models import HTMLField
 from imagekit.models import ImageSpecField, ProcessedImageField
 from imagekit.processors import ResizeToFill
 from autoslug import AutoSlugField
-from django.utils.timezone import now
 
 
 class Country(models.Model):

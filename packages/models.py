@@ -158,7 +158,7 @@ class Package(models.Model):
     description = HTMLField()
 
     package_type = models.ManyToManyField(PackageType)
-    #experience = models.ManyToManyField(Experience)
+
     month = models.ManyToManyField(Month)
 
     specialist = models.ForeignKey(

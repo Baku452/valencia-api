@@ -1,6 +1,5 @@
 from .models import Package, PackageType, PackageImage, Experience
 from specialists.models import Specialist
-from itineraries.models import Itinerary
 from rest_framework import serializers
 from itineraries.serializers import ItinerarySerializer
 

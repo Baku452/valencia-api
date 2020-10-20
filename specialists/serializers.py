@@ -1,5 +1,6 @@
 from .models import ContactUs, Newsletter
 from rest_framework import serializers
+from packages.models import PackageType
 
 
 class ContactUsSerializer(serializers.ModelSerializer):
@@ -10,6 +11,11 @@ class ContactUsSerializer(serializers.ModelSerializer):
 
 
 class NewsletterSerializer(serializers.ModelSerializer):
+
+    package_type = serializers.PrimaryKeyRelatedField(
+         many=True,
+         queryset=PackageType.objects.all()
+    )
 
     class Meta:
         model = Newsletter
