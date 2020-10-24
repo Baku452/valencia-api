@@ -22,8 +22,8 @@ from django.conf import settings
 from django.conf.urls import url
 
 from rest_framework import permissions
-from drf_yasg.views import get_schema_view
-from drf_yasg import openapi
+from drf_yasg2.views import get_schema_view
+from drf_yasg2 import openapi
 
 from destinations.views import (
     DestinationListApi,
@@ -37,7 +37,8 @@ from packages.views import (
     PackageTypeDetailApi,
     PackageHomeListApi,
     PackageListApi,
-    ExperienceListApi
+    ExperienceListApi,
+    InterestListApi,
 )
 
 from itineraries.views import (
@@ -78,6 +79,8 @@ urlpatterns = [
 
     path('packagestype/', PackageTypeListApi.as_view(), name='packages-type-list'),
     path('packagestype/<int:pk>', PackageTypeDetailApi.as_view(), name='packages-type-list'),
+
+    path('interests/', InterestListApi.as_view(), name='interest-list'),
 
     path('contact_us/', ContactCreateApi.as_view(), name='contact_us-create'),
     path('newsletter/', NewsletterCreateApi.as_view(), name='newsletter-create'),

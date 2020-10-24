@@ -6,6 +6,7 @@ from imagekit.models import ImageSpecField, ProcessedImageField
 from autoslug import AutoSlugField
 from imagekit.processors import ResizeToFill
 from destinations.models import Destination
+from django.core.validators import FileExtensionValidator
 
 
 RATING_CHOICES = (
@@ -99,12 +100,37 @@ class Month(models.Model):
 class PackageType(models.Model):
     title = models.CharField(max_length=255)
     active = models.BooleanField(default=False)
+    order = models.PositiveIntegerField(default=0, blank=False, null=False)
+    svg = models.FileField(
+        upload_to='images/package_type/',
+        default='',
+        validators=[FileExtensionValidator(['svg'])]
+    )
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         db_table = 'package_type'
+        ordering = ['order']
+
+    def __str__(self):
+        return self.title
+
+
+class Interest(models.Model):
+    title = models.CharField(max_length=255)
+    active = models.BooleanField(default=False)
+    order = models.PositiveIntegerField(default=0, blank=False, null=False)
+
+    package_types = models.ManyToManyField(PackageType)
+
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'interest'
+        ordering = ['order']
 
     def __str__(self):
         return self.title
@@ -158,6 +184,8 @@ class Package(models.Model):
     description = HTMLField()
 
     package_type = models.ManyToManyField(PackageType)
+
+    interest = models.ManyToManyField(Interest)
 
     month = models.ManyToManyField(Month)
 

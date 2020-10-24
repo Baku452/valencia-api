@@ -5,13 +5,14 @@ from rest_framework import status
 from django_filters.rest_framework import DjangoFilterBackend
 from django_filters import rest_framework as filters
 
-from .models import Destination, Package, PackageType, Experience
+from .models import Destination, Package, PackageType, Experience, Interest
 from .serializers import (
     PackageSerializer,
     PackageTypeSerializer,
     PackageDetailSerializer,
     ExperienceSerializer,
-    PackageDetailTypesSerializer
+    PackageDetailTypesSerializer,
+    InterestSerializer,
 )
 
 from rest_framework import generics
@@ -53,10 +54,10 @@ class PackageTypeDetailApi(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-class PackageTypeListApi(APIView):
+class InterestListApi(APIView):
     def get(self, request):
-        packages = PackageType.objects.all().filter(active=True)
-        serializer = PackageTypeSerializer(packages, many=True)
+        interests = Interest.objects.all().filter(active=True)
+        serializer = InterestSerializer(interests, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
@@ -95,11 +96,12 @@ class PackageFilter(filters.FilterSet):
     end = filters.NumberFilter(field_name="days", lookup_expr='lte')
     activity = NumberInFilter(field_name="activity", lookup_expr="in")
     types = NumberInFilter(field_name='package_type__id', lookup_expr="in")
+    interests = NumberInFilter(field_name='interest__id', lookup_expr="in")
     months = CharInFilter(field_name='month__name', lookup_expr="in")
 
     class Meta:
         model = Package
-        fields = ['destination', 'start', 'end', 'activity', 'types', 'months']
+        fields = ['destination', 'start', 'end', 'activity', 'types', 'interests', 'months']
 
 
 class PackageSearchApi(generics.ListAPIView):

@@ -1,6 +1,7 @@
 from django.contrib import admin
-from .models import Package, PackageImage, PackageType, Month, Experience
-from itineraries.models import Itinerary, ItineraryImage
+from .models import Package, PackageImage, PackageType, Month, Experience, Interest
+from itineraries.models import Itinerary
+from adminsortable2.admin import SortableAdminMixin
 
 
 class ItineraryAdmin(admin.StackedInline):
@@ -25,7 +26,7 @@ class PackageAdmin(admin.ModelAdmin):
 
 
 @admin.register(PackageType)
-class PackageTypeAdmin(admin.ModelAdmin):
+class PackageTypeAdmin(SortableAdminMixin, admin.ModelAdmin):
     pass
 
 
@@ -38,9 +39,10 @@ class MonthAdmin(admin.ModelAdmin):
 class ExperienceAdmin(admin.ModelAdmin):
     pass
 
-#@admin.register(PackageImage)
-#class PackageImageAdmin(admin.ModelAdmin):
-#    pass
+
+@admin.register(Interest)
+class InterestAdmin(SortableAdminMixin, admin.ModelAdmin):
+    pass
 
 # Register your models here.
 # admin.site.register(Package)

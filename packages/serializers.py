@@ -1,7 +1,14 @@
-from .models import Package, PackageType, PackageImage, Experience
+from .models import Package, PackageType, PackageImage, Experience, Interest
 from specialists.models import Specialist
 from rest_framework import serializers
 from itineraries.serializers import ItinerarySerializer
+
+
+class InterestSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Interest
+        fields = '__all__'
 
 
 class ExperienceSerializer(serializers.ModelSerializer):

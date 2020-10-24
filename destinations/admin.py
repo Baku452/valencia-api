@@ -1,9 +1,10 @@
 from django.contrib import admin
 from .models import Banner, Country, Destination
+from adminsortable2.admin import SortableAdminMixin
 
 
 @admin.register(Banner)
-class BannerAdmin(admin.ModelAdmin):
+class BannerAdmin(SortableAdminMixin, admin.ModelAdmin):
     pass
 
 
@@ -13,5 +14,5 @@ class CountryAdmin(admin.ModelAdmin):
 
 
 @admin.register(Destination)
-class DestinationAdmin(admin.ModelAdmin):
+class DestinationAdmin(SortableAdminMixin, admin.ModelAdmin):
     pass

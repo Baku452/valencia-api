@@ -21,11 +21,15 @@ class Country(models.Model):
 
 class Destination(models.Model):
     title = models.CharField(max_length=255)
+    sub_title = models.CharField(max_length=255, default='')
+
     slug = AutoSlugField(
         populate_from='title',
         unique_with=['title'],
         always_update=True
     )
+
+    order = models.PositiveIntegerField(default=0, blank=False, null=False)
 
     picture = models.ImageField(upload_to='images/destination/')
 
@@ -52,12 +56,14 @@ class Destination(models.Model):
         on_delete=models.CASCADE
     )
 
+    tailor_made = models.BooleanField(default=False)
     active = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         db_table = 'destination'
+        ordering = ['order']
 
     def __str__(self):
         return self.title
@@ -66,6 +72,7 @@ class Destination(models.Model):
 class Banner(models.Model):
     name = models.CharField(max_length=255)
     active = models.BooleanField(default=False)
+    order = models.PositiveIntegerField(default=0, blank=False, null=False)
 
     image = ProcessedImageField(
         upload_to='images/banner/',
@@ -79,6 +86,7 @@ class Banner(models.Model):
 
     class Meta:
         db_table = 'banner'
+        ordering = ['order']
 
     def __str__(self):
         return self.name
