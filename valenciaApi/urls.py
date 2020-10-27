@@ -39,6 +39,8 @@ from packages.views import (
     PackageListApi,
     ExperienceListApi,
     InterestListApi,
+    NotificationListApi,
+    NotificationRetrieveApi,
 )
 
 from itineraries.views import (
@@ -76,6 +78,10 @@ urlpatterns = [
 
     path('destinations/', DestinationListApi.as_view(), name='destination-list'),
     path('banners/', BannerListApi.as_view(), name='banners-list'),
+
+    path('notification/', NotificationListApi.as_view(), name='notification-list'),
+    path('notification/<str:slug>', NotificationRetrieveApi.as_view(), name='notification-retrieve'),
+
 
     path('packagestype/', PackageTypeListApi.as_view(), name='packages-type-list'),
     path('packagestype/<int:pk>', PackageTypeDetailApi.as_view(), name='packages-type-list'),

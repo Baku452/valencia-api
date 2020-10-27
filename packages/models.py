@@ -170,6 +170,32 @@ class Experience(models.Model):
         return self.title
 
 
+class Notification(models.Model):
+    title = models.CharField(max_length=255, default='')
+
+    slug = AutoSlugField(
+        populate_from='title',
+        unique_with=['title'],
+        always_update=True
+    )
+
+    content = HTMLField()
+
+    keywords = models.TextField(default='')
+
+    active = models.BooleanField(default=False)
+
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'notification'
+
+    def __str__(self):
+        return self.title
+
+
+
 class Package(models.Model):
     title = models.CharField(max_length=255, default='')
     keywords = models.TextField(default='')
@@ -239,6 +265,7 @@ class Package(models.Model):
 
     published = models.BooleanField(default=False)
     is_home = models.BooleanField(default=False)
+    show_specialist = models.BooleanField(default=False)
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

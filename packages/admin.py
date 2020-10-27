@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Package, PackageImage, PackageType, Month, Experience, Interest
+from .models import Package, PackageImage, PackageType, Month, Experience, Interest, Notification
 from itineraries.models import Itinerary
 from adminsortable2.admin import SortableAdminMixin
 
@@ -43,6 +43,14 @@ class ExperienceAdmin(admin.ModelAdmin):
 @admin.register(Interest)
 class InterestAdmin(SortableAdminMixin, admin.ModelAdmin):
     pass
+
+
+@admin.register(Notification)
+class NotificationAdmin(admin.ModelAdmin):
+    pass
+
+
+
 
 # Register your models here.
 # admin.site.register(Package)

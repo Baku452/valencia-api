@@ -108,6 +108,11 @@ DATABASES = {
 }
 
 
+# Twilio SendGrid
+EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
+SENDGRID_API_KEY = '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'
+SENDGRID_SANDBOX_MODE_IN_DEBUG = False
+
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 

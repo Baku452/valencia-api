@@ -5,7 +5,7 @@ from rest_framework import status
 from django_filters.rest_framework import DjangoFilterBackend
 from django_filters import rest_framework as filters
 
-from .models import Destination, Package, PackageType, Experience, Interest
+from .models import Destination, Package, PackageType, Experience, Interest, Notification
 from .serializers import (
     PackageSerializer,
     PackageTypeSerializer,
@@ -13,10 +13,18 @@ from .serializers import (
     ExperienceSerializer,
     PackageDetailTypesSerializer,
     InterestSerializer,
+    NotificationSerializer,
 )
 
 from rest_framework import generics
 from django_filters import rest_framework as filters
+
+
+def get_object_notify(slug):
+    try:
+        return Notification.objects.get(slug=slug)
+    except Notification.DoesNotExist:
+        raise Http404
 
 
 def get_object(slug):
@@ -37,6 +45,20 @@ class PackageRetrieveApi(APIView):
     def get(self, request, slug):
         package = get_object(slug)
         serializer = PackageDetailSerializer(package)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class NotificationRetrieveApi(APIView):
+    def get(self, request, slug):
+        notification = get_object_notify(slug)
+        serializer = NotificationSerializer(notification)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class NotificationListApi(APIView):
+    def get(self, request):
+        notifications = Notification.objects.all().filter(active=True)
+        serializer = NotificationSerializer(notifications, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 

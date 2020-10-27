@@ -19,6 +19,7 @@ django-autoslug = "*"
 packaging = "*"
 drf-yasg2 = "*"
 django-admin-sortable2 = "*"
+django-sendgrid-v5 = "*"
 
 [requires]
 python_version = "3.8"
