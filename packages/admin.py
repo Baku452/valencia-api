@@ -18,7 +18,8 @@ class PackageImageAdmin(admin.TabularInline):
 
 @admin.register(Package)
 class PackageAdmin(admin.ModelAdmin):
-    list_display = ('title', 'published')
+    list_display = ('title', 'destination', 'published')
+    search_fields = ('title', 'destination__title', )
     inlines = [PackageImageAdmin, ItineraryAdmin]
 
     class Meta:

@@ -26,6 +26,7 @@ ACTIVITY_CHOICES = (
 )
 
 DAYS_CHOICES = (
+    (0, 0),
     (1, 1),
     (2, 2),
     (3, 3),
@@ -193,7 +194,6 @@ class Notification(models.Model):
 
     def __str__(self):
         return self.title
-
 
 
 class Package(models.Model):

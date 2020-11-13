@@ -28,6 +28,7 @@ class Itinerary(models.Model):
 
     class Meta:
         db_table = 'itinerary'
+        ordering = ['subtitle']
 
     def __str__(self):
         return self.subtitle
