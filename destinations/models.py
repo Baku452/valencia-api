@@ -3,6 +3,28 @@ from tinymce.models import HTMLField
 from imagekit.models import ImageSpecField, ProcessedImageField
 from imagekit.processors import ResizeToFill
 from autoslug import AutoSlugField
+import os
+
+
+def path_and_rename(instance, filename):
+    print('AAAAA/...', instance.slug, filename)
+    upload_to = 'images/banner/'
+    ext = filename.split('.')[-1]
+    if instance.pk:
+        filename = '{}.{}'.format(instance.slug, ext)
+    else:
+        filename = '{}.{}'.format(instance.slug, ext)
+    return os.path.join(upload_to, filename)
+
+
+def path_and_rename_destination(instance, filename):
+    upload_to = 'images/destination/'
+    ext = filename.split('.')[-1]
+    if instance.pk:
+        filename = '{}.{}'.format(instance.slug, ext)
+    else:
+        filename = '{}.{}'.format(instance.slug, ext)
+    return os.path.join(upload_to, filename)
 
 
 class Country(models.Model):
@@ -31,20 +53,11 @@ class Destination(models.Model):
 
     order = models.PositiveIntegerField(default=0, blank=False, null=False)
 
-    picture = models.ImageField(upload_to='images/destination/')
-
-    thumbnail = ImageSpecField(
-        source='picture',
-        processors=[ResizeToFill(120, 50)],
+    picture = ProcessedImageField(
+        upload_to=path_and_rename_destination,
+        processors=[ResizeToFill(1600, 700)],
         format='JPEG',
-        options={'quality': 60}
-    )
-
-    original = ImageSpecField(
-        source='picture',
-        processors=[ResizeToFill(1500, 800)],
-        format='JPEG',
-        options={'quality': 80}
+        options={'quality': 100}
     )
 
     content = HTMLField()
@@ -74,8 +87,14 @@ class Banner(models.Model):
     active = models.BooleanField(default=False)
     order = models.PositiveIntegerField(default=0, blank=False, null=False)
 
+    slug = AutoSlugField(
+        populate_from='name',
+        unique_with=['name'],
+        always_update=True
+    )
+
     image = ProcessedImageField(
-        upload_to='images/banner/',
+        upload_to=path_and_rename,
         processors=[ResizeToFill(1600, 700)],
         format='JPEG',
         options={'quality': 100}

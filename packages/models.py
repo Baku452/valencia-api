@@ -7,6 +7,7 @@ from autoslug import AutoSlugField
 from imagekit.processors import ResizeToFill
 from destinations.models import Destination
 from django.core.validators import FileExtensionValidator
+import os
 
 
 RATING_CHOICES = (
@@ -80,6 +81,28 @@ MONTHS_CHOICES = (
     ("November", "November"),
     ("December", "December"),
 )
+
+
+def path_and_rename(instance, filename):
+    upload_to = 'images/packages-thumbnail/'
+    ext = filename.split('.')[-1]
+    if instance.pk:
+        filename = '{}.{}'.format(instance.slug, ext)
+    else:
+        filename = '{}.{}'.format(instance.slug, ext)
+    return os.path.join(upload_to, filename)
+
+
+def path_and_rename_package(instance, filename):
+
+    print('AAAAA/...', instance.slug, filename)
+    upload_to = 'images/package/'
+    ext = filename.split('.')[-1]
+    if instance.pk:
+        filename = '{}.{}'.format(instance.slug, ext)
+    else:
+        filename = '{}.{}'.format(instance.slug, ext)
+    return os.path.join(upload_to, filename)
 
 
 class Month(models.Model):
@@ -257,7 +280,7 @@ class Package(models.Model):
     )
 
     thumbnail = ProcessedImageField(
-        upload_to='images/packages-thumbnail/',
+        upload_to=path_and_rename,
         processors=[ResizeToFill(390, 230)],
         format='JPEG',
         options={'quality': 100}
@@ -284,22 +307,26 @@ class PackageImage(models.Model):
         default=None,
         on_delete=models.CASCADE
     )
-    image = models.FileField(upload_to='images/package/')
+    alt = models.CharField(max_length=255, default='')
 
-    original = ImageSpecField(
-        source='image',
-        processors=[ResizeToFill(1500, 800)],
+    slug = AutoSlugField(
+        populate_from='alt',
+        unique_with=['alt'],
+        always_update=True
+    )
+
+    image = ProcessedImageField(
+        upload_to=path_and_rename_package,
+        processors=[ResizeToFill(1600, 700)],
         format='JPEG',
         options={'quality': 100}
     )
-
-    alt = models.CharField(max_length=255, default='')
 
     class Meta:
         db_table = 'package_image'
 
     def __str__(self):
-        return self.package.title
+        return self.alt
 
     def image_tag(self):
         return mark_safe('<img src="/media/%s" width="150" height="150" />' % self.image)

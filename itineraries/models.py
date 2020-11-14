@@ -2,7 +2,9 @@ from django.db import models
 from tinymce.models import HTMLField
 from packages.models import Package
 from imagekit.models import ProcessedImageField
+from autoslug import AutoSlugField
 from imagekit.processors import ResizeToFill
+import os
 
 ITINERARY_CHOICES = (
     ("Meals Included", "Meals Included"),
@@ -10,7 +12,16 @@ ITINERARY_CHOICES = (
 )
 
 
-# Create your models here.
+def path_and_rename(instance, filename):
+    upload_to = 'images/itinerary/'
+    ext = filename.split('.')[-1]
+    if instance.pk:
+        filename = '{}.{}'.format(instance.slug, ext)
+    else:
+        filename = '{}.{}'.format(instance.slug, ext)
+    return os.path.join(upload_to, filename)
+
+
 class Itinerary(models.Model):
 
     package = models.ForeignKey(
@@ -36,6 +47,14 @@ class Itinerary(models.Model):
 
 class ItineraryImage(models.Model):
 
+    alt = models.CharField(max_length=255, default='')
+
+    slug = AutoSlugField(
+        populate_from='alt',
+        unique_with=['alt'],
+        always_update=True
+    )
+
     itinerary = models.ForeignKey(
         Itinerary,
         related_name='images',
@@ -44,13 +63,11 @@ class ItineraryImage(models.Model):
     )
 
     image = ProcessedImageField(
-        upload_to='images/itinerary/',
+        upload_to=path_and_rename,
         processors=[ResizeToFill(1000, 700)],
         format='JPEG',
         options={'quality': 100}
     )
-
-    alt = models.CharField(max_length=255, default='')
 
     class Meta:
         db_table = 'itinerary_image'
