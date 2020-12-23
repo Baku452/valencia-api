@@ -20,6 +20,7 @@ packaging = "*"
 drf-yasg2 = "*"
 django-admin-sortable2 = "*"
 django-sendgrid-v5 = "*"
+python-dotenv = "*"
 
 [requires]
 python_version = "3.8"

@@ -95,7 +95,6 @@ def path_and_rename(instance, filename):
 
 def path_and_rename_package(instance, filename):
 
-    print('AAAAA/...', instance.slug, filename)
     upload_to = 'images/package/'
     ext = filename.split('.')[-1]
     if instance.pk:

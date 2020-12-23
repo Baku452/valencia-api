@@ -7,7 +7,6 @@ import os
 
 
 def path_and_rename(instance, filename):
-    print('AAAAA/...', instance.slug, filename)
     upload_to = 'images/banner/'
     ext = filename.split('.')[-1]
     if instance.pk:

@@ -33,6 +33,9 @@ class Itinerary(models.Model):
 
     subtitle = models.CharField(max_length=255, default='')
     content = HTMLField()
+
+    limit = models.PositiveIntegerField(default=0, blank=False, null=False)
+
     active = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
