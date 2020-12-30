@@ -3,7 +3,6 @@ from rest_framework import serializers
 
 
 class DestinationSerializer(serializers.ModelSerializer):
-    #thumbnail = serializers.py.ImageField(read_only=True)
 
     class Meta:
         model = Destination

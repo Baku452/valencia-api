@@ -42,7 +42,12 @@ class Country(models.Model):
 
 class Destination(models.Model):
     title = models.CharField(max_length=255)
-    sub_title = models.CharField(max_length=255, default='')
+
+    sub_title = models.CharField(
+        max_length=255,
+        default='',
+        blank=True
+    )
 
     slug = AutoSlugField(
         populate_from='title',

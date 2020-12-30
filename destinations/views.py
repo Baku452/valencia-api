@@ -9,7 +9,7 @@ from .serializers import CountrySerializer, BannerSerializer
 
 class DestinationListApi(APIView):
     def get(self, request):
-        countries = Country.objects.all().filter(active=True)
+        countries = Country.objects.filter(active=True)
         serializer = CountrySerializer(countries, many=True)
         return Response(serializer.data, status=HTTP_200_OK)
 
