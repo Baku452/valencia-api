@@ -47,6 +47,7 @@ class Destination(models.Model):
         max_length=255,
         default='',
         blank=True
+
     )
 
     slug = AutoSlugField(

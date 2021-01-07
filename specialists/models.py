@@ -1,7 +1,6 @@
 from django.db import models
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
-#from packages.models import PackageType
 
 
 class Specialist(models.Model):
@@ -46,6 +45,8 @@ class ContactUs(models.Model):
     email = models.EmailField(max_length=255, default='')
     country_residence = models.CharField(max_length=255, default='')
     destination_interest = models.CharField(max_length=255, default='')
+
+    package = models.CharField(max_length=255, default='')
 
     message = models.TextField(max_length=999, default='')
     is_newsletter = models.BooleanField(default=False)
