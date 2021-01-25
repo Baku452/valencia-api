@@ -10,7 +10,7 @@ from django.core.mail import send_mail
 # from .models import ContactUs, Newsletter
 from .serializers import ContactUsSerializer, NewsletterSerializer
 
-subject = 'Welcome to Valencia Travel'
+subject = ' '
 html_message = render_to_string('mail_template.html', {'context': 'values'})
 plain_message = strip_tags(html_message)
 from_email = 'From <michel.hinostroza@gmail.com>'

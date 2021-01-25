@@ -35,6 +35,7 @@ class Itinerary(models.Model):
     content = HTMLField()
 
     limit = models.PositiveIntegerField(default=0, blank=False, null=False)
+    order = models.PositiveIntegerField(default=0, blank=False, null=False)
 
     active = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
@@ -42,7 +43,7 @@ class Itinerary(models.Model):
 
     class Meta:
         db_table = 'itinerary'
-        ordering = ['subtitle']
+        ordering = ['order']
 
     def __str__(self):
         return self.subtitle
