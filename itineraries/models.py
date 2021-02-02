@@ -11,6 +11,18 @@ ITINERARY_CHOICES = (
     ("Accommodations", "Accommodations"),
 )
 
+YEAR_CHOICES = (
+    (2021, "2021"),
+    (2022, "2022"),
+    (2023, "2023"),
+    (2024, "2024"),
+    (2025, "2025"),
+    (2026, "2026"),
+    (2027, "2027"),
+    (2028, "2028"),
+    (2029, "2029"),
+)
+
 
 def path_and_rename(instance, filename):
     upload_to = 'images/itinerary/'
@@ -47,6 +59,87 @@ class Itinerary(models.Model):
 
     def __str__(self):
         return self.subtitle
+
+
+class Faq(models.Model):
+
+    package = models.ForeignKey(
+        Package,
+        default=None,
+        related_name='faqs',
+        on_delete=models.CASCADE
+    )
+
+    title = models.CharField(max_length=255, default='')
+    content = HTMLField()
+
+    order = models.PositiveIntegerField(default=0, blank=False, null=False)
+
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'faq'
+        ordering = ['order']
+
+    def __str__(self):
+        return self.title
+
+
+class OptionalRenting(models.Model):
+
+    package = models.ForeignKey(
+        Package,
+        default=None,
+        related_name='optionals',
+        on_delete=models.CASCADE
+    )
+
+    title = models.CharField(max_length=255, default='')
+    content = HTMLField()
+
+    order = models.PositiveIntegerField(default=0, blank=False, null=False)
+
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'optional_renting'
+        ordering = ['order']
+
+    def __str__(self):
+        return self.title
+
+
+class DatesAndPrices(models.Model):
+
+    package = models.ForeignKey(
+        Package,
+        default=None,
+        related_name='dates_prices',
+        on_delete=models.CASCADE
+    )
+
+    year = models.IntegerField(
+        choices=YEAR_CHOICES,
+        default=2021
+    )
+
+    date_range = models.CharField(max_length=255, default='')
+
+    spots = models.PositiveIntegerField(default=0, blank=False, null=False)
+    sold_out = models.BooleanField(default=False)
+    order = models.PositiveIntegerField(default=0, blank=False, null=False)
+
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'dates_prices'
+        ordering = ['order']
+
+    def __str__(self):
+        return self.date_range + ', ' + str(self.year)
 
 
 class ItineraryImage(models.Model):

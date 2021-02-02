@@ -230,8 +230,16 @@ class Package(models.Model):
     )
 
     description = HTMLField()
+    whats_included = HTMLField()
+    whats_not_included = HTMLField()
 
     package_type = models.ManyToManyField(PackageType)
+
+    related_packages = models.ManyToManyField(
+        "self",
+        blank=True,
+        default=None,
+    )
 
     interest = models.ManyToManyField(Interest)
 

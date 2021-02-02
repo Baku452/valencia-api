@@ -1,7 +1,27 @@
 from django.contrib import admin
 from .models import Package, PackageImage, PackageType, Month, Experience, Interest, Notification
-from itineraries.models import Itinerary
+from itineraries.models import (
+    Itinerary,
+    Faq,
+    OptionalRenting,
+    DatesAndPrices,
+)
 from adminsortable2.admin import SortableAdminMixin
+
+
+class DatesAndPricesAdmin(admin.StackedInline):
+    model = DatesAndPrices
+    extra = 0
+
+
+class OptionalRentingAdmin(admin.StackedInline):
+    model = OptionalRenting
+    extra = 0
+
+
+class FaqAdmin(admin.StackedInline):
+    model = Faq
+    extra = 0
 
 
 class ItineraryAdmin(admin.StackedInline):
@@ -20,7 +40,13 @@ class PackageImageAdmin(admin.TabularInline):
 class PackageAdmin(admin.ModelAdmin):
     list_display = ('title', 'destination', 'published')
     search_fields = ('title', 'destination__title', )
-    inlines = [PackageImageAdmin, ItineraryAdmin]
+    inlines = [
+        PackageImageAdmin,
+        ItineraryAdmin,
+        FaqAdmin,
+        OptionalRentingAdmin,
+        DatesAndPricesAdmin
+    ]
 
     class Meta:
         model = Package

@@ -153,9 +153,13 @@ USE_TZ = True
 
 
 TINYMCE_DEFAULT_CONFIG = {
-    'plugins': "link",
+    'plugins': "link lists autolink",
     'cleanup_on_startup': True,
     'custom_undo_redo_levels': 120,
+    "toolbar": "undo redo | bold italic underline strikethrough | alignleft "
+    "aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist "
+    "fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | "
+    "a11ycheck ltr rtl | showcomments addcomment code",
 }
 
 STATIC_URL = '/static/'

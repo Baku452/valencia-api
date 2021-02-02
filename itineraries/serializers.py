@@ -1,4 +1,11 @@
-from .models import Itinerary, ItineraryImage, ItineraryItems
+from .models import (
+    Itinerary,
+    ItineraryImage,
+    ItineraryItems,
+    Faq,
+    OptionalRenting,
+    DatesAndPrices,
+)
 from rest_framework import serializers
 
 
@@ -9,7 +16,7 @@ class ItineraryImageSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class ItineraryItemseSerializer(serializers.ModelSerializer):
+class ItineraryItemsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ItineraryItems
@@ -18,8 +25,29 @@ class ItineraryItemseSerializer(serializers.ModelSerializer):
 
 class ItinerarySerializer(serializers.ModelSerializer):
     images = ItineraryImageSerializer(many=True, read_only=True)
-    items = ItineraryItemseSerializer(many=True, read_only=True)
+    items = ItineraryItemsSerializer(many=True, read_only=True)
 
     class Meta:
         model = Itinerary
+        fields = '__all__'
+
+
+class FaqSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Faq
+        fields = '__all__'
+
+
+class OptionalRentingSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = OptionalRenting
+        fields = '__all__'
+
+
+class DatesAndPricesSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = DatesAndPrices
         fields = '__all__'
