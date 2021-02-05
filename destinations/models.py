@@ -89,6 +89,8 @@ class Destination(models.Model):
 
 class Banner(models.Model):
     name = models.CharField(max_length=255)
+    summary = models.TextField(max_length=350, default='')
+
     active = models.BooleanField(default=False)
     order = models.PositiveIntegerField(default=0, blank=False, null=False)
 
