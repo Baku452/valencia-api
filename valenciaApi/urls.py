@@ -37,10 +37,12 @@ from packages.views import (
     PackageTypeDetailApi,
     PackageHomeListApi,
     PackageListApi,
+    PackageOptionalTours,
     ExperienceListApi,
     InterestListApi,
     NotificationListApi,
     NotificationRetrieveApi,
+    PackageOptionalSearchApi,
 )
 
 from itineraries.views import (
@@ -50,6 +52,10 @@ from itineraries.views import (
 from specialists.views import (
     ContactCreateApi,
     NewsletterCreateApi
+)
+
+from tailors.views import (
+    TailorListApi,
 )
 
 schema_view = get_schema_view(
@@ -69,8 +75,10 @@ admin.site.site_header = 'Valencia Travel'
 admin.site.site_title = 'Valencia Travel'
 
 urlpatterns = [
+
     path('admin/', admin.site.urls),
     path('tinymce/', include('tinymce.urls')),
+    url(r'^chaining/', include('smart_selects.urls')),
 
     url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
@@ -94,11 +102,15 @@ urlpatterns = [
     path('packages/home/', PackageHomeListApi.as_view(), name='packages-search'),
     path('packages/', PackageSearchApi.as_view(), name='packages-search'),
     path('packages/list/', PackageListApi.as_view(), name='packages-list'),
+    path('packages/optional/', PackageOptionalSearchApi.as_view(), name='packages-optional'),
+
 
     path('experiences/list/', ExperienceListApi.as_view(), name='experiences-list'),
 
     path('package/<str:slug>', PackageRetrieveApi.as_view(), name='packages-retrieve'),
     path('itineraries/<int:pk>', ItineraryRetrieveApi.as_view(), name='itineraries-retrieve'),
+
+    path('tailors/list/', TailorListApi.as_view(), name='tailors-retrieve'),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

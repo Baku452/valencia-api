@@ -7,6 +7,7 @@ from autoslug import AutoSlugField
 from imagekit.processors import ResizeToFill
 from destinations.models import Destination
 from django.core.validators import FileExtensionValidator
+from smart_selects.db_fields import ChainedForeignKey
 import os
 
 
@@ -230,8 +231,8 @@ class Package(models.Model):
     )
 
     description = HTMLField()
-    whats_included = HTMLField()
-    whats_not_included = HTMLField()
+    whats_included = HTMLField(default=None, blank=True)
+    whats_not_included = HTMLField(default=None, blank=True)
 
     package_type = models.ManyToManyField(PackageType)
 
@@ -292,9 +293,10 @@ class Package(models.Model):
         format='JPEG',
         options={'quality': 100}
     )
-
+    old_overview = HTMLField(blank=True)
     published = models.BooleanField(default=False)
     is_home = models.BooleanField(default=False)
+    optional = models.BooleanField(default=False)
     show_specialist = models.BooleanField(default=False)
 
     created = models.DateTimeField(auto_now_add=True)

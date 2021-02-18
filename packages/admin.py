@@ -1,10 +1,14 @@
 from django.contrib import admin
+from search_admin_autocomplete.admin import SearchAutoCompleteAdmin
 from .models import Package, PackageImage, PackageType, Month, Experience, Interest, Notification
 from itineraries.models import (
     Itinerary,
     Faq,
     OptionalRenting,
     DatesAndPrices,
+)
+from old_itinerario.models import (
+    ItineraryOld
 )
 from adminsortable2.admin import SortableAdminMixin
 
@@ -28,6 +32,9 @@ class ItineraryAdmin(admin.StackedInline):
     model = Itinerary
     extra = 0
 
+class ItineraryOldAdmin(admin.StackedInline):
+    model = ItineraryOld
+    extra = 0
 
 class PackageImageAdmin(admin.TabularInline):
     model = PackageImage
@@ -38,11 +45,12 @@ class PackageImageAdmin(admin.TabularInline):
 
 @admin.register(Package)
 class PackageAdmin(admin.ModelAdmin):
-    list_display = ('title', 'destination', 'published')
-    search_fields = ('title', 'destination__title', )
+    list_display = ('title', 'days','destination', 'published', 'optional')
+    search_fields = ('title', 'destination__title', 'optional')
     inlines = [
         PackageImageAdmin,
         ItineraryAdmin,
+        ItineraryOldAdmin,
         FaqAdmin,
         OptionalRentingAdmin,
         DatesAndPricesAdmin

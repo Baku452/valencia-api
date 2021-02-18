@@ -79,9 +79,13 @@ INSTALLED_APPS = [
     'drf_yasg2',
     'tinymce',
     'packages',
+    'smart_selects',
     'specialists',
     'itineraries',
     'destinations',
+    'search_admin_autocomplete',
+    'tailors',
+    'old_itinerario'
 ]
 
 REST_FRAMEWORK = {
@@ -169,3 +173,4 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+USE_DJANGO_JQUERY = True
