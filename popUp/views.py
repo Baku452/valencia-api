@@ -19,5 +19,5 @@ from django_filters import rest_framework as filters
 class PopUpListApi(APIView):
     def get(self, request):
         popup = PopUp.objects.all().filter(active=True)
-        serializer = PopUpserializar(popup, many=True)
+        serializer = PopUpSerializer(popup, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
