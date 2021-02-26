@@ -85,7 +85,12 @@ INSTALLED_APPS = [
     'destinations',
     'search_admin_autocomplete',
     'tailors',
-    'old_itinerario'
+    'old_itinerario',
+    'modelclone',
+    'nested_inline',
+    'ourPurpose',
+    'history',
+    'popUp'
 ]
 
 REST_FRAMEWORK = {

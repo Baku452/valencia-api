@@ -61,6 +61,18 @@ from specialists.views import (
 from tailors.views import (
     TailorListApi,
 )
+from ourPurpose.views import (
+    OurPurposeListApi,
+)
+
+from history.views import (
+    HistoryApi,
+)
+
+from popUp.views import (
+    PopUpListApi
+)
+
 
 schema_view = get_schema_view(
    openapi.Info(
@@ -116,6 +128,10 @@ urlpatterns = [
     path('old_itinerario/<int:pk>', ItineraryOldRetrieveApi.as_view(), name='itinerariesOld-retrieve'),
 
     path('tailors/list/', TailorListApi.as_view(), name='tailors-retrieve'),
+    path('ourpurpose/list/', OurPurposeListApi.as_view(), name='ourpurpose-retrieve'),
+    
+    path('history/', HistoryApi.as_view(), name='history-retrieve'),
+    path('popup/', PopUpListApi.as_view(), name='popup-retrieve'),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

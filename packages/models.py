@@ -291,13 +291,16 @@ class Package(models.Model):
         upload_to=path_and_rename,
         processors=[ResizeToFill(390, 230)],
         format='JPEG',
-        options={'quality': 100}
+        options={'quality': 100},
+        blank = True
     )
     old_overview = HTMLField(blank=True)
     published = models.BooleanField(default=False)
     is_home = models.BooleanField(default=False)
     optional = models.BooleanField(default=False)
     show_specialist = models.BooleanField(default=False)
+    recommendations = HTMLField(blank=True)
+
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
