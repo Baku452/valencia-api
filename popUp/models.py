@@ -12,7 +12,7 @@ class PopUp(models.Model):
     image = models.FileField(upload_to='images/popup/', blank=True, null=True)
     original = ImageSpecField(
         source='image',
-        processors=[ResizeToFill(346, 714)],
+        processors=[ResizeToFill(432, 342)],
         format='JPEG',
         options={'quality': 98},
     )
