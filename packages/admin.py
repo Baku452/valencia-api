@@ -1,5 +1,4 @@
 from django.contrib import admin
-from search_admin_autocomplete.admin import SearchAutoCompleteAdmin
 from .models import Package, PackageImage, PackageType, Month, Experience, Interest, Notification
 from itineraries.models import (
     Itinerary,
