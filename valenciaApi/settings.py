@@ -83,7 +83,6 @@ INSTALLED_APPS = [
     'specialists',
     'itineraries',
     'destinations',
-    'search_admin_autocomplete',
     'tailors',
     'old_itinerario',
     'modelclone',
