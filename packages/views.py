@@ -14,6 +14,7 @@ from .serializers import (
     PackageDetailTypesSerializer,
     InterestSerializer,
     NotificationSerializer,
+    OptionalRentingSerializer
 )
 
 from rest_framework import generics
@@ -109,6 +110,11 @@ class PackageOptionalTours(APIView):
         serializer = PackageSerializer(packages, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+class OptionalRentingApi(APIView):
+    def get(self, request, pk):
+        package = get_object_id(pk)
+        serializer = OptionalRentingSerializer(package)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 class NumberInFilter(filters.BaseInFilter, filters.NumberFilter):
     pass

@@ -1,9 +1,8 @@
 from django.contrib import admin
-from .models import Package, PackageImage, PackageType, Month, Experience, Interest, Notification
+from .models import Package, PackageImage, PackageType, Month, Experience, Interest, Notification, OptionalImageRenting, OptionalRenting
 from itineraries.models import (
     Itinerary,
     Faq,
-    OptionalRenting,
     DatesAndPrices,
     ItineraryImage,
 )
@@ -18,6 +17,7 @@ from nested_inline.admin import NestedStackedInline, NestedModelAdmin
 class DatesAndPricesAdmin(NestedStackedInline):
     model = DatesAndPrices
     extra = 0
+
 
 
 class OptionalRentingAdmin(NestedStackedInline):
@@ -65,7 +65,6 @@ class PackageAdmin(ClonableModelAdmin,NestedModelAdmin, admin.ModelAdmin):
         ItineraryAdmin,
         ItineraryOldAdmin,
         FaqAdmin,
-        OptionalRentingAdmin,
         DatesAndPricesAdmin
     ]
     save_as = True
@@ -97,6 +96,18 @@ class InterestAdmin(SortableAdminMixin, admin.ModelAdmin):
 class NotificationAdmin(admin.ModelAdmin):
     pass
 
+
+class OptionalRentingImageAdmin(NestedStackedInline):
+    model = OptionalImageRenting
+    extra = 0 
+@admin.register(OptionalRenting)
+class OptionalRentingAdmin(admin.ModelAdmin):
+    
+    inlines = [OptionalRentingImageAdmin]
+ 
+
+    class Meta:
+        model = OptionalRenting
 
 
 

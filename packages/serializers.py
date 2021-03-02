@@ -1,14 +1,17 @@
-from .models import Package, PackageType, PackageImage, Experience, Interest, Notification
+from .models import Package, PackageType, PackageImage, Experience, Interest, Notification, OptionalRenting,OptionalImageRenting
 from specialists.models import Specialist
 from rest_framework import serializers
 from old_itinerario.serializers import ItineraryOldSerializer
 from itineraries.serializers import (
     ItinerarySerializer,
     FaqSerializer,
-    OptionalRentingSerializer,
     DatesAndPricesSerializer,
 )
 
+class OptionalRentingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OptionalRenting
+        fields = '__all__'
 
 class NotificationSerializer(serializers.ModelSerializer):
 
@@ -46,6 +49,11 @@ class PackageTypeSerializer(serializers.ModelSerializer):
         model = PackageType
         fields = '__all__'
 
+class OptionalRentingImageSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = OptionalImageRenting
+        fields = '__all__'
 
 class PackageImageSerializer(serializers.ModelSerializer):
 

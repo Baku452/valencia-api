@@ -217,7 +217,51 @@ class Notification(models.Model):
 
     def __str__(self):
         return self.title
+class OptionalRenting(models.Model):
+    title = models.CharField(max_length=255, default='')
+    content = HTMLField()
 
+    order = models.PositiveIntegerField(default=0, blank=False, null=False)
+
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'optional_Renting'
+        ordering = ['order']
+
+    def __str__(self):
+        return self.title
+
+class OptionalImageRenting(models.Model):
+
+    alt = models.CharField(max_length=255, default='')
+
+    slug = AutoSlugField(
+        populate_from='alt',
+        unique_with=['alt'],
+        always_update=True
+    )
+
+    optional_renting = models.ForeignKey(
+        OptionalRenting,
+        related_name='images',
+        default=None,
+        on_delete=models.CASCADE
+    )
+
+    image = ProcessedImageField(
+        upload_to=path_and_rename,
+        processors=[ResizeToFill(1000, 700)],
+        format='JPEG',
+        options={'quality': 100}
+    )
+
+    class Meta:
+        db_table = 'optionalRenting_Image'
+
+    def __str__(self):
+        return self.optional_renting.title
 
 class Package(models.Model):
     title = models.CharField(max_length=255, default='')
@@ -294,6 +338,7 @@ class Package(models.Model):
         options={'quality': 100},
         blank = True
     )
+    optional_forRenting = models.ManyToManyField(OptionalRenting)
     old_overview = HTMLField(blank=True)
     published = models.BooleanField(default=False)
     is_home = models.BooleanField(default=False)
