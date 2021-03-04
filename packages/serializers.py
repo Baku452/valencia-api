@@ -7,8 +7,13 @@ from itineraries.serializers import (
     FaqSerializer,
     DatesAndPricesSerializer,
 )
+class OptionalRentingImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OptionalImageRenting
+        fields = '__all__'
 
 class OptionalRentingSerializer(serializers.ModelSerializer):
+    images = OptionalRentingImageSerializer(many=True, read_only=True)
     class Meta:
         model = OptionalRenting
         fields = '__all__'
@@ -49,11 +54,7 @@ class PackageTypeSerializer(serializers.ModelSerializer):
         model = PackageType
         fields = '__all__'
 
-class OptionalRentingImageSerializer(serializers.ModelSerializer):
 
-    class Meta:
-        model = OptionalImageRenting
-        fields = '__all__'
 
 class PackageImageSerializer(serializers.ModelSerializer):
 
@@ -77,7 +78,7 @@ class PackageDetailSerializer(serializers.ModelSerializer):
     old_itinerario = ItineraryOldSerializer(many=True, read_only=True)
     related_packages = PackageSerializer(many=True, read_only=True)
     faqs = FaqSerializer(many=True, read_only=True)
-    optionals = OptionalRentingSerializer(many=True, read_only=True)
+    optional_forRenting = OptionalRentingSerializer(many=True, read_only=True)
     dates_prices = DatesAndPricesSerializer(many=True, read_only=True)
 
     class Meta:

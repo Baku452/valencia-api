@@ -14,18 +14,18 @@ from modelclone import ClonableModelAdmin
 from nested_inline.admin import NestedStackedInline, NestedModelAdmin
 
 
-class DatesAndPricesAdmin(NestedStackedInline):
+class DatesAndPricesAdmin(admin.StackedInline):
     model = DatesAndPrices
     extra = 0
 
 
 
-class OptionalRentingAdmin(NestedStackedInline):
+class OptionalRentingAdmin(admin.StackedInline):
     model = OptionalRenting
     extra = 0
 
 
-class FaqAdmin(NestedStackedInline):
+class FaqAdmin(admin.StackedInline):
     model = Faq
     extra = 0
 
@@ -33,21 +33,20 @@ class FaqAdmin(NestedStackedInline):
 # class ItineraryAdmin(admin.StackedInline):
 #     model = Itinerary
 #     extra = 0
-class ItineraryImageAdmin(NestedStackedInline):
-    model = ItineraryImage
-    extra = 0
-    fk_name = 'itinerary'
-class ItineraryAdmin(NestedStackedInline):
+# class ItineraryImageAdmin(NestedStackedInline):
+#     model = ItineraryImage
+#     extra = 0
+#     fk_name = 'itinerary'
+class ItineraryAdmin(admin.StackedInline):
     model = Itinerary
     extra = 0
-    fk_name = 'package'
-    inlines = [ItineraryImageAdmin]
+    # inlines = [ItineraryImageAdmin]
 
-class ItineraryOldAdmin(NestedStackedInline):
+class ItineraryOldAdmin(admin.StackedInline):
     model = ItineraryOld
     extra = 0
 
-class PackageImageAdmin(NestedStackedInline):
+class PackageImageAdmin(admin.TabularInline):
     model = PackageImage
     extra = 0
     fields = ['image', 'alt', 'image_tag']
@@ -57,7 +56,7 @@ class PackageImageAdmin(NestedStackedInline):
 
 
 @admin.register(Package)
-class PackageAdmin(ClonableModelAdmin,NestedModelAdmin, admin.ModelAdmin):
+class PackageAdmin(admin.ModelAdmin):
     list_display = ('title', 'days','destination', 'published', 'optional')
     search_fields = ('title', 'destination__title', 'optional')
     inlines = [
@@ -67,7 +66,7 @@ class PackageAdmin(ClonableModelAdmin,NestedModelAdmin, admin.ModelAdmin):
         FaqAdmin,
         DatesAndPricesAdmin
     ]
-    save_as = True
+    # save_as = True
     class Meta:
         model = Package
 
