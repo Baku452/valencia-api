@@ -266,7 +266,7 @@ class OptionalImageRenting(models.Model):
 class Package(models.Model):
     title = models.CharField(max_length=255, default='')
     keywords = models.TextField(default='')
-
+    titleSEO = models.TextField(max_length=255, default='')
     summary = models.TextField(max_length=350, default='')
     slug = AutoSlugField(
         populate_from='title',
