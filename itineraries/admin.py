@@ -2,10 +2,12 @@ from django.contrib import admin
 from .models import Itinerary, ItineraryImage, ItineraryItems
 
 
-class ItineraryImageAdmin(admin.StackedInline):
+class ItineraryImageAdmin(admin.TabularInline):
     model = ItineraryImage
     extra = 0
-
+    fields = ['image', 'alt', 'image_tag']
+    readonly_fields = ['image_tag']
+    inlines = ""
 
 class ItineraryItemsAdmin(admin.StackedInline):
     model = ItineraryItems
