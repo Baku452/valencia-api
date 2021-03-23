@@ -1,3 +1,6 @@
+import os
+from dotenv import load_dotenv
+load_dotenv()
 from rest_framework.views import APIView
 from django.http import Http404
 from rest_framework.response import Response
@@ -13,8 +16,8 @@ from .serializers import ContactUsSerializer, NewsletterSerializer
 subject = 'Web Opportunity '
 html_message = render_to_string('mail_template.html', {'context': 'values'})
 plain_message = strip_tags(html_message)
-from_email = '<seo@valenciatravelcusco.com>'
-to = 'seo@valenciatravelcusco.com'
+from_email = os.getenv("DJANGO_FROM_MAIL")
+to = os.getenv("DJANGO_TO_MAIL")
 
 
 class ContactCreateApi(APIView):
