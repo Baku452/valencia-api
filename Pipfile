@@ -24,6 +24,9 @@ python-dotenv = "*"
 django-nested-inline = "*"
 django-modelclone = "*"
 django-smart-selects = "*"
+django-ckeditor = "*"
+django-filebrowser = "*"
+django-grappelli = "*"
 
 [requires]
 python_version = "3.8"

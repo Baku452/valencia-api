@@ -25,9 +25,16 @@ from rest_framework import permissions
 from drf_yasg2.views import get_schema_view
 from drf_yasg2 import openapi
 
+from filebrowser.sites import site
+
 from destinations.views import (
     DestinationListApi,
     BannerListApi
+)
+from blog.views import (
+    BlogTypeListApi,
+    BlogRetrieveApi,
+    BlogSearchApi
 )
 
 from packages.views import (
@@ -92,6 +99,8 @@ admin.site.site_header = 'Valencia Travel'
 admin.site.site_title = 'Valencia Travel'
 
 urlpatterns = [
+    url(r"^admin/filebrowser/", site.urls),
+    path('grappelli/', include('grappelli.urls')),
 
     path('admin/', admin.site.urls),
     path('tinymce/', include('tinymce.urls')),
@@ -135,5 +144,13 @@ urlpatterns = [
     path('history/', HistoryApi.as_view(), name='history-retrieve'),
     path('popup/', PopUpListApi.as_view(), name='popup-retrieve'),
 
+    path('blog/<str:slu>', BlogRetrieveApi.as_view(), name='blog-retrieve'),
+    path('blogtypes/', BlogTypeListApi.as_view(), name='blog-types'),
+    path('blog/', BlogSearchApi.as_view(), name='blog-search'),
+    path('blog/list', PackageListApi.as_view(), name='blog-list'),
+
+
+    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+   
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

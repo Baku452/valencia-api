@@ -89,9 +89,15 @@ INSTALLED_APPS = [
     'nested_inline',
     'ourPurpose',
     'history',
-    'popUp'
+    'popUp',
+    'ckeditor',
+    'ckeditor_uploader',
+    'grappelli',
+    'filebrowser',
+    'blog',
 ]
 
+CKEDITOR_UPLOAD_PATH = 'uploads'
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
@@ -100,7 +106,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 
 WSGI_APPLICATION = 'valenciaApi.wsgi.application'
-
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
