@@ -43,6 +43,7 @@ from packages.views import (
     NotificationListApi,
     NotificationRetrieveApi,
     PackageOptionalSearchApi,
+    PackageTitleApi
 )
 
 from itineraries.views import (
@@ -117,6 +118,7 @@ urlpatterns = [
 
     path('packages/home/', PackageHomeListApi.as_view(), name='packages-search'),
     path('packages/', PackageSearchApi.as_view(), name='packages-search'),
+    path('packages/titles/', PackageTitleApi.as_view(), name='packages-titles'),
     path('packages/list/', PackageListApi.as_view(), name='packages-list'),
     path('packages/optional/', PackageOptionalSearchApi.as_view(), name='packages-optional'),
 

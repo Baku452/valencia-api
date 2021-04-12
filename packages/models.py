@@ -21,7 +21,7 @@ RATING_CHOICES = (
 
 ACTIVITY_CHOICES = (
     (1, "Very HIgh"),
-    (2, "HIgh"),
+    (2, "High"),
     (3, "Moderate"),
     (4, "Low"),
     (5, "Very Low"),

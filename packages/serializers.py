@@ -47,6 +47,10 @@ class PackageSerializer(serializers.ModelSerializer):
         model = Package
         fields = '__all__'
 
+class PackageTitleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Package
+        fields = ['title','slug']
 
 class PackageTypeSerializer(serializers.ModelSerializer):
 
