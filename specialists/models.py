@@ -1,7 +1,7 @@
 from django.db import models
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
-
+from datetime import date
 
 class Specialist(models.Model):
     fullname = models.CharField(max_length=255, default='')
@@ -47,10 +47,16 @@ class ContactUs(models.Model):
     destination_interest = models.CharField(max_length=255, default='')
     number = models.CharField(max_length=255, default='')
     package = models.CharField(max_length=255, default='')
-
+    accommodation = models.CharField(max_length=255, default='')
     message = models.TextField(max_length=999, default='')
     is_newsletter = models.BooleanField(default=False)
-
+    adults = models.IntegerField(default=0)
+    budget = models.CharField(max_length=255, default='')
+    children = models.IntegerField(default=0)
+    departureDate = models.DateField(default = date.today)
+    destination_interest = models.CharField(max_length=255, default='')
+    internationalFlight = models.CharField(max_length=255, default='')
+    lengthStay = models.CharField(max_length=255, default='')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
