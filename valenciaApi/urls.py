@@ -34,7 +34,8 @@ from destinations.views import (
 from blog.views import (
     BlogTypeListApi,
     BlogRetrieveApi,
-    BlogSearchApi
+    BlogSearchApi,
+    BlogListApi
 )
 
 from packages.views import (
@@ -144,10 +145,10 @@ urlpatterns = [
     path('history/', HistoryApi.as_view(), name='history-retrieve'),
     path('popup/', PopUpListApi.as_view(), name='popup-retrieve'),
 
-    path('blog/<str:slu>', BlogRetrieveApi.as_view(), name='blog-retrieve'),
+    path('blog/<str:slug>', BlogRetrieveApi.as_view(), name='blog-retrieve'),
     path('blogtypes/', BlogTypeListApi.as_view(), name='blog-types'),
     path('blog/', BlogSearchApi.as_view(), name='blog-search'),
-    path('blog/list', PackageListApi.as_view(), name='blog-list'),
+    path('blog/list/', BlogListApi.as_view(), name='blog-list'),
 
 
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),

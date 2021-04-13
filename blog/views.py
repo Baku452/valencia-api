@@ -17,13 +17,19 @@ from .serializers import (
 from rest_framework import generics
 from django_filters import rest_framework as filters
 
+def get_object(slug):
+    try:
+        return Blog.objects.get(slug=slug)
+    except Blog.DoesNotExist:
+        raise Http404
+
 class NumberInFilter(filters.BaseInFilter, filters.NumberFilter):
     pass
 
-class PackageListApi(APIView):
+class BlogListApi(APIView):
     def get(self, request):
         blogs = Blog.objects.all().filter(published=True)
-        serializer = BlogSerializer(packages, many=True)
+        serializer = BlogSerializer(blogs, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 class BlogRetrieveApi(APIView):
