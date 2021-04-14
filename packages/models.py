@@ -20,7 +20,7 @@ RATING_CHOICES = (
 )
 
 ACTIVITY_CHOICES = (
-    (1, "Very HIgh"),
+    (1, "Very High"),
     (2, "High"),
     (3, "Moderate"),
     (4, "Low"),
@@ -345,7 +345,7 @@ class Package(models.Model):
     optional = models.BooleanField(default=False)
     show_specialist = models.BooleanField(default=False)
     recommendations = HTMLField(blank=True)
-
+    promo = models.BooleanField(default=False)
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
