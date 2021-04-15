@@ -267,6 +267,10 @@ class Package(models.Model):
     title = models.CharField(max_length=255, default='')
     keywords = models.TextField(default='')
     titleSEO = models.TextField(max_length=255, default='')
+    highligths = models.TextField(max_length=255, default='', blank=True)
+    price = models.TextField(max_length=255, default='', blank=True)
+    offer = models.TextField(max_length=255, default='', blank=True)
+    saveUpTo = models.TextField(max_length=255, default='', blank=True)
     summary = models.TextField(max_length=350, default='')
     slug = AutoSlugField(
         populate_from='title',
@@ -277,7 +281,7 @@ class Package(models.Model):
     description = HTMLField()
     whats_included = HTMLField(default=None, blank=True)
     whats_not_included = HTMLField(default=None, blank=True)
-
+    video = models.FileField(upload_to="video/packages/", blank=True, null=True)
     package_type = models.ManyToManyField(PackageType)
 
     related_packages = models.ManyToManyField(
@@ -343,9 +347,9 @@ class Package(models.Model):
     published = models.BooleanField(default=False)
     is_home = models.BooleanField(default=False)
     optional = models.BooleanField(default=False)
+    promo = models.BooleanField(default=False)
     show_specialist = models.BooleanField(default=False)
     recommendations = HTMLField(blank=True)
-    promo = models.BooleanField(default=False)
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
