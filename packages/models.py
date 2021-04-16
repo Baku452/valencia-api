@@ -8,8 +8,10 @@ from imagekit.processors import ResizeToFill
 from destinations.models import Destination
 from django.core.validators import FileExtensionValidator
 from smart_selects.db_fields import ChainedForeignKey
+from django.core.files.storage import FileSystemStorage
 import os
 
+fs = FileSystemStorage(location='/media/videos')
 
 RATING_CHOICES = (
     ("1", "1"),
@@ -281,7 +283,8 @@ class Package(models.Model):
     description = HTMLField()
     whats_included = HTMLField(default=None, blank=True)
     whats_not_included = HTMLField(default=None, blank=True)
-    video = models.FileField(upload_to="video/packages/", blank=True, null=True)
+    video = models.FileField(storage=fs, blank=True, null=True)
+    videoURL = models.TextField(blank=True, null=True)
     package_type = models.ManyToManyField(PackageType)
 
     related_packages = models.ManyToManyField(
