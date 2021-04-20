@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Specialist, ContactUs, Newsletter
+from .models import Specialist, ContactUs, ContactUsB2C, ContactUsB2B,TailorForm,Newsletter
 # Register your models here.
 
 
@@ -10,9 +10,23 @@ class SpecialistAdmin(admin.ModelAdmin):
 
 @admin.register(ContactUs)
 class ContactUsAdmin(admin.ModelAdmin):
-    readonly_fields=('first_name', 'last_name', 'email', 'country_residence', 'destination_interest', 'message', 'is_newsletter', 'package',)
+    readonly_fields=('first_name', 'last_name', 'email', 'country_residence', 'destination_interest', 'message', 'is_newsletter',)
     pass
 
+@admin.register(ContactUsB2C)
+class ContactUsB2CAdmin(admin.ModelAdmin):
+    readonly_fields=('first_name', 'last_name', 'email', 'country_residence', 'destination_interest', 'number', 'accommodation', 'message', 'is_newsletter', 'adults','children', 'departureDate', 'internationalFlight', 'lengthStay', )
+    pass
+
+@admin.register(ContactUsB2B)
+class ContactUsB2BAdmin(admin.ModelAdmin):
+    readonly_fields=('first_name', 'last_name', 'email', 'number', 'company',  'message',)
+    pass
+
+@admin.register(TailorForm)
+class NewsletterAdmin(admin.ModelAdmin):
+    readonly_fields=('first_name', 'last_name', 'email', 'number', 'destination_interest', 'accommodation', 'departureDate', 'lengthStay', 'adults', 'children', 'internationalFlight', 'budget', 'trip_type', 'hear_about', 'message' )
+    pass
 
 @admin.register(Newsletter)
 class NewsletterAdmin(admin.ModelAdmin):

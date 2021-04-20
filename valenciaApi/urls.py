@@ -66,7 +66,10 @@ from old_itinerario.views import (
 
 from specialists.views import (
     ContactCreateApi,
-    NewsletterCreateApi
+    NewsletterCreateApi,
+    ContactB2BCreateApi,
+    ContactB2CCreateApi,
+    TailorMadeCreateApi
 )
 
 from tailors.views import (
@@ -126,6 +129,9 @@ urlpatterns = [
     path('interests/', InterestListApi.as_view(), name='interest-list'),
 
     path('contact_us/', ContactCreateApi.as_view(), name='contact_us-create'),
+    path('contact_b2c/', ContactB2CCreateApi.as_view(), name='contact_b2c-create'),
+    path('contact_b2b/', ContactB2BCreateApi.as_view(), name='contact_b2b-create'),
+    path('tailorForm/', TailorMadeCreateApi.as_view(), name='tailorForm-create'),
     path('newsletter/', NewsletterCreateApi.as_view(), name='newsletter-create'),
 
     path('packages/home/', PackageHomeListApi.as_view(), name='packages-search'),
