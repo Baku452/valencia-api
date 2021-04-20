@@ -156,7 +156,7 @@ urlpatterns = [
 
     path('blog/<str:slug>', BlogRetrieveApi.as_view(), name='blog-retrieve'),
     path('blogtypes/', BlogTypeListApi.as_view(), name='blog-types'),
-    path('blog/', BlogSearchApi.as_view(), name='blog-search'),
+    path('blog/', BlogListApi.as_view(), name='blog-search'),
     path('blog/list/', BlogListApi.as_view(), name='blog-list'),
 
 

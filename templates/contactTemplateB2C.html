@@ -156,9 +156,19 @@ ul li {
 			<table>
 				<tr>
 					<td>
-            <h2 class="heading">Web opportunity</h2>
+            {% if is_promo %}
+              <h2 class="heading">Promotional Tour - Web opportunity</h2>
+            {% else %}
+              <h2 class="heading">Web opportunity</h2>
+            {% endif %}
 						<h3>Package: {{package}}</h3>
 					</td>
+        </tr>
+                <tr>
+                  <td>
+                    
+                    <a href="{{url}}">Product Link</a>
+                  </td>
                 </tr>
                 <tr>
                     <td>

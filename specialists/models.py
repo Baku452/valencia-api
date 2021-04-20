@@ -73,6 +73,8 @@ class ContactUsB2C(models.Model):
     departureDate = models.DateField(default = date.today)
     internationalFlight = models.CharField(max_length=255, default='')
     lengthStay = models.CharField(max_length=255, default='')
+    is_promo = models.BooleanField(default=False)
+    url = models.CharField(max_length=255, default='')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -91,6 +93,8 @@ class ContactUsB2B(models.Model):
     company = models.CharField(max_length=255, default='')
     package = models.CharField(max_length=255, default='')
     message = models.TextField(max_length=999, default='')
+    is_promo = models.BooleanField(default=False)
+    url = models.CharField(max_length=255, default='')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 

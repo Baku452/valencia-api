@@ -26,11 +26,6 @@ def get_object(slug):
 class NumberInFilter(filters.BaseInFilter, filters.NumberFilter):
     pass
 
-class BlogListApi(APIView):
-    def get(self, request):
-        blogs = Blog.objects.all().filter(published=True)
-        serializer = BlogSerializer(blogs, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
 
 class BlogRetrieveApi(APIView):
     def get(self, request, slug):
@@ -57,3 +52,13 @@ class BlogSearchApi(generics.ListAPIView):
     serializer_class = BlogDetailSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_class = BlogFilter
+
+class BlogListApi(generics.ListAPIView):
+    queryset = Blog.objects.all().filter(published=True).distinct()
+    serializer_class = BlogSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = BlogFilter
+    # def get(self, request):
+    #     blogs = Blog.objects.all().filter(published=True)
+    #     serializer = BlogSerializer(blogs, many=True)
+    #     return Response(serializer.data, status=status.HTTP_200_OK)

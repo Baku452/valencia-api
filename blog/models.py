@@ -8,6 +8,7 @@ from destinations.models import Destination
 from django.core.validators import FileExtensionValidator
 from smart_selects.db_fields import ChainedForeignKey
 from ckeditor_uploader.fields import RichTextUploadingField 
+from django.contrib.auth.models import User
 import os
 
 
@@ -48,6 +49,7 @@ class BlogType(models.Model):
 
 class Blog(models.Model):
     title = models.CharField(max_length=255, default='')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True,  blank=True)
     keywords = models.TextField(default='', blank=True)
     titleSEO = models.TextField(max_length=255, default='', blank=True)
     slug = AutoSlugField(
