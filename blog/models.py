@@ -63,7 +63,7 @@ class Blog(models.Model):
 
     thumbnail = ProcessedImageField(
         upload_to=path_and_rename,
-        processors=[ResizeToFill(390, 230)],
+        processors=[ResizeToFill(407, 290)],
         format='JPEG',
         options={'quality': 95},
         blank = True

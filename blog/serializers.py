@@ -3,6 +3,9 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from django.db.models.functions import Concat
 class BlogDetailSerializer(serializers.ModelSerializer):
+    first_name = serializers.ReadOnlyField(source="author.first_name")
+    last_name = serializers.ReadOnlyField(source="author.last_name")
+    destination = serializers.SlugRelatedField(read_only=True, slug_field='title')
     class Meta:
         model = Blog
         fields = '__all__'
