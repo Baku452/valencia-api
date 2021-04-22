@@ -98,6 +98,14 @@ INSTALLED_APPS = [
 ]
 
 CKEDITOR_UPLOAD_PATH = 'uploads'
+CKEDITOR_CONFIGS = {
+       'default': {
+           'toolbar': 'full',
+           'height': 800,
+           'width': 1200,
+           'extraPlugins': 'liststyle',
+       },
+   }
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
