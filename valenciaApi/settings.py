@@ -89,9 +89,24 @@ INSTALLED_APPS = [
     'nested_inline',
     'ourPurpose',
     'history',
-    'popUp'
+    'popUp',
+    'ckeditor',
+    'ckeditor_uploader',
+    'grappelli',
+    'filebrowser',
+    'blog',
+    'django_cleanup',
 ]
 
+CKEDITOR_UPLOAD_PATH = 'uploads'
+CKEDITOR_CONFIGS = {
+       'default': {
+           'toolbar': 'full',
+           'height': 800,
+           'width': 1200,
+           'extraPlugins': 'liststyle',
+       },
+   }
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
@@ -100,7 +115,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 
 WSGI_APPLICATION = 'valenciaApi.wsgi.application'
-
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -170,7 +185,7 @@ TINYMCE_DEFAULT_CONFIG = {
     "a11ycheck ltr rtl | showcomments addcomment code",
 }
 
-STATIC_URL = '/static/'
+STATIC_URL = '/static_root/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]

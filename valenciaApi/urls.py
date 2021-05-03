@@ -25,9 +25,17 @@ from rest_framework import permissions
 from drf_yasg2.views import get_schema_view
 from drf_yasg2 import openapi
 
+from filebrowser.sites import site
+
 from destinations.views import (
     DestinationListApi,
     BannerListApi
+)
+from blog.views import (
+    BlogTypeListApi,
+    BlogRetrieveApi,
+    BlogSearchApi,
+    BlogListApi
 )
 
 from packages.views import (
@@ -43,7 +51,9 @@ from packages.views import (
     NotificationListApi,
     NotificationRetrieveApi,
     PackageOptionalSearchApi,
-    PackageTitleApi
+    PackageTitleApi,
+    PackagePromoSearchApi,
+    PackagePromoAdventureSearchApi
 )
 
 from itineraries.views import (
@@ -56,7 +66,10 @@ from old_itinerario.views import (
 
 from specialists.views import (
     ContactCreateApi,
-    NewsletterCreateApi
+    NewsletterCreateApi,
+    ContactB2BCreateApi,
+    ContactB2CCreateApi,
+    TailorMadeCreateApi
 )
 
 from tailors.views import (
@@ -92,6 +105,8 @@ admin.site.site_header = 'Valencia Travel'
 admin.site.site_title = 'Valencia Travel'
 
 urlpatterns = [
+    url(r"^admin/filebrowser/", site.urls),
+    path('grappelli/', include('grappelli.urls')),
 
     path('admin/', admin.site.urls),
     path('tinymce/', include('tinymce.urls')),
@@ -114,6 +129,9 @@ urlpatterns = [
     path('interests/', InterestListApi.as_view(), name='interest-list'),
 
     path('contact_us/', ContactCreateApi.as_view(), name='contact_us-create'),
+    path('contact_b2c/', ContactB2CCreateApi.as_view(), name='contact_b2c-create'),
+    path('contact_b2b/', ContactB2BCreateApi.as_view(), name='contact_b2b-create'),
+    path('tailorForm/', TailorMadeCreateApi.as_view(), name='tailorForm-create'),
     path('newsletter/', NewsletterCreateApi.as_view(), name='newsletter-create'),
 
     path('packages/home/', PackageHomeListApi.as_view(), name='packages-search'),
@@ -121,7 +139,8 @@ urlpatterns = [
     path('packages/titles/', PackageTitleApi.as_view(), name='packages-titles'),
     path('packages/list/', PackageListApi.as_view(), name='packages-list'),
     path('packages/optional/', PackageOptionalSearchApi.as_view(), name='packages-optional'),
-
+    path('packages/promo/', PackagePromoSearchApi.as_view(), name='packages-promo'),
+    path('packages/promo/adventure/', PackagePromoAdventureSearchApi.as_view(), name='packages-promo'),
 
     path('experiences/list/', ExperienceListApi.as_view(), name='experiences-list'),
 
@@ -135,5 +154,13 @@ urlpatterns = [
     path('history/', HistoryApi.as_view(), name='history-retrieve'),
     path('popup/', PopUpListApi.as_view(), name='popup-retrieve'),
 
+    path('blog/<str:slug>', BlogRetrieveApi.as_view(), name='blog-retrieve'),
+    path('blogtypes/', BlogTypeListApi.as_view(), name='blog-types'),
+    path('blog/', BlogSearchApi.as_view(), name='blog-search'),
+    path('blog/list/', BlogListApi.as_view(), name='blog-list'),
+
+
+    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+   
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

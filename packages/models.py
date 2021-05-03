@@ -8,8 +8,10 @@ from imagekit.processors import ResizeToFill
 from destinations.models import Destination
 from django.core.validators import FileExtensionValidator
 from smart_selects.db_fields import ChainedForeignKey
+from django.core.files.storage import FileSystemStorage
 import os
 
+fs = FileSystemStorage(location='/media/videos')
 
 RATING_CHOICES = (
     ("1", "1"),
@@ -20,7 +22,7 @@ RATING_CHOICES = (
 )
 
 ACTIVITY_CHOICES = (
-    (1, "Very HIgh"),
+    (1, "Very High"),
     (2, "High"),
     (3, "Moderate"),
     (4, "Low"),
@@ -267,6 +269,10 @@ class Package(models.Model):
     title = models.CharField(max_length=255, default='')
     keywords = models.TextField(default='')
     titleSEO = models.TextField(max_length=255, default='')
+    highligths = models.TextField(max_length=255, default='', blank=True)
+    price = models.TextField(max_length=255, default='', blank=True)
+    offer = models.TextField(max_length=255, default='', blank=True)
+    saveUpTo = models.TextField(max_length=255, default='', blank=True)
     summary = models.TextField(max_length=350, default='')
     slug = AutoSlugField(
         populate_from='title',
@@ -277,7 +283,8 @@ class Package(models.Model):
     description = HTMLField()
     whats_included = HTMLField(default=None, blank=True)
     whats_not_included = HTMLField(default=None, blank=True)
-
+    video = models.FileField(storage=fs, blank=True, null=True)
+    videoURL = models.TextField(blank=True, null=True)
     package_type = models.ManyToManyField(PackageType)
 
     related_packages = models.ManyToManyField(
@@ -343,9 +350,10 @@ class Package(models.Model):
     published = models.BooleanField(default=False)
     is_home = models.BooleanField(default=False)
     optional = models.BooleanField(default=False)
+    promo = models.BooleanField(default=False)
+    luxury = models.BooleanField(default=False)
     show_specialist = models.BooleanField(default=False)
     recommendations = HTMLField(blank=True)
-
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

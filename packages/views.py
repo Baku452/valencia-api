@@ -117,6 +117,14 @@ class PackageOptionalTours(APIView):
         serializer = PackageSerializer(packages, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+# class PackagePromoTours(APIView):
+#     def get(self, request):
+#         id=2
+#         packages = Package.objects.all().exclude(id__in=package_type__contains)
+#         serializer = PackageSerializer(packages, many=True)
+#         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
 class OptionalRentingApi(APIView):
     def get(self, request, pk):
         package = get_object_id(pk)
@@ -160,6 +168,20 @@ class PackageSearchApi(generics.ListAPIView):
 
 class PackageOptionalSearchApi(generics.ListAPIView):
     queryset = Package.objects.all().filter(optional=True).distinct()
+    serializer_class = PackageSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = PackageOptionalFilter
+
+class PackagePromoSearchApi(generics.ListAPIView):
+    id=2
+    queryset = Package.objects.all().filter(promo=True).exclude(package_type=2).distinct()
+    serializer_class = PackageSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = PackageOptionalFilter
+
+class PackagePromoAdventureSearchApi(generics.ListAPIView):
+    id=2
+    queryset = Package.objects.all().filter(promo=True).filter(package_type=2).distinct()
     serializer_class = PackageSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_class = PackageOptionalFilter
