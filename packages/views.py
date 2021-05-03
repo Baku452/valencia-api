@@ -185,3 +185,9 @@ class PackagePromoAdventureSearchApi(generics.ListAPIView):
     serializer_class = PackageSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_class = PackageOptionalFilter
+
+class PackageLuxuryApi(generics.ListAPIView):
+    queryset = Package.objects.all().filter(luxury=True).distinct()
+    serializer_class = PackageSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = PackageFilter
