@@ -95,6 +95,7 @@ INSTALLED_APPS = [
     'grappelli',
     'filebrowser',
     'blog',
+    'django_cleanup',
 ]
 
 CKEDITOR_UPLOAD_PATH = 'uploads'

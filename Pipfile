@@ -27,6 +27,7 @@ django-smart-selects = "*"
 django-ckeditor = "*"
 django-filebrowser = "*"
 django-grappelli = "*"
+django-cleanup = "*"
 
 [requires]
 python_version = "3.8"
