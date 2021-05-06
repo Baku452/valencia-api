@@ -107,7 +107,7 @@ class PackageListApi(APIView):
 
 class PackageTitleApi(APIView):
     def get(self, request):
-        packages = Package.objects.all().filter(published=True)
+        packages = Package.objects.all().filter(published=True).order_by('-rating')
         serializer = PackageTitleSerializer(packages, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -161,7 +161,7 @@ class PackageOptionalFilter(filters.FilterSet):
 
 
 class PackageSearchApi(generics.ListAPIView):
-    queryset = Package.objects.all().filter(published=True).distinct()
+    queryset = Package.objects.all().filter(published=True).order_by('-rating').distinct()
     serializer_class = PackageSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_class = PackageFilter

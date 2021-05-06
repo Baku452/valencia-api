@@ -354,7 +354,7 @@ class Package(models.Model):
     luxury = models.BooleanField(default=False)
     show_specialist = models.BooleanField(default=False)
     recommendations = HTMLField(blank=True)
-
+    rating = models.IntegerField(blank=True, default=0)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
