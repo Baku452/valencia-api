@@ -43,7 +43,8 @@ class ExperienceSerializer(serializers.ModelSerializer):
 class PackageSerializer(serializers.ModelSerializer):
     thumbnail = serializers.ImageField(read_only=True)
     type_name = serializers.StringRelatedField(many=True, source="package_type")
-
+    destination_name = serializers.StringRelatedField(source="destination")
+    activity_name = serializers.StringRelatedField(source="activity")
     class Meta:
         model = Package
         fields = '__all__'

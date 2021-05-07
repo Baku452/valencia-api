@@ -40,7 +40,8 @@ DAYS_CHOICES = (
     (7, 7),
     (8, 8),
     (9, 9),
-    (10, 11),
+    (10, 10),
+    (11, 11),
     (12, 12),
     (13, 13),
     (14, 14),
@@ -355,6 +356,7 @@ class Package(models.Model):
     show_specialist = models.BooleanField(default=False)
     recommendations = HTMLField(blank=True)
     rating = models.IntegerField(blank=True, default=0)
+    featured = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
