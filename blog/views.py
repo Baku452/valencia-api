@@ -54,11 +54,5 @@ class BlogSearchApi(generics.ListAPIView):
     filterset_class = BlogFilter
 
 class BlogListApi(generics.ListAPIView):
-    queryset = Blog.objects.all().filter(published=True).order_by('-created').distinct()[:10]
+    queryset = Blog.objects.all().filter(published=True).order_by('-created').distinct()[:4]
     serializer_class = BlogSerializer
-    # filter_backends = [DjangoFilterBackend]
-    # filterset_class = BlogFilter
-    # def get(self, request):
-    #     blogs = Blog.objects.all().filter(published=True)
-    #     serializer = BlogSerializer(blogs, many=True)
-    #     return Response(serializer.data, status=status.HTTP_200_OK)

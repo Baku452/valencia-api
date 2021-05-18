@@ -15,8 +15,9 @@ class BlogDetailSerializer(serializers.ModelSerializer):
     destination = serializers.SlugRelatedField(read_only=True, slug_field='title')
     blog_type = serializers.SlugRelatedField(many=True, read_only=True, slug_field='id')
     type_name = serializers.StringRelatedField(many=True, source="blog_type")
-    # blog_type = BlogTypeSerializer(many=True, read_only=True)
     created = serializers.DateTimeField(format="%d-%m-%Y", required=False, read_only=True)
+    thumbnail_cat = serializers.ImageField(read_only=True)
+    
     def full_name(self):
         return self.first_name+" "+self.last_name
     class Meta:

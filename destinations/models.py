@@ -31,7 +31,7 @@ class Country(models.Model):
     active = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-
+    
     class Meta:
         db_table = 'country'
         verbose_name_plural = 'Countries'
@@ -63,6 +63,13 @@ class Destination(models.Model):
         processors=[ResizeToFill(1600, 700)],
         format='JPEG',
         options={'quality': 100}
+    )
+
+    thumbnail = ImageSpecField(
+        source='image',
+        processors=[ResizeToFill(638, 425)],
+        format='JPEG',
+        options={'quality': 95},
     )
 
     content = HTMLField()

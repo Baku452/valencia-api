@@ -36,7 +36,13 @@ class BlogType(models.Model):
     title = models.CharField(max_length=255)
     active = models.BooleanField(default=False)
     order = models.PositiveIntegerField(default=0, blank=False, null=False)
-
+    thumbnail = ProcessedImageField(
+        upload_to=path_and_rename,
+        processors=[ResizeToFill(380, 250)],
+        format='JPEG',
+        options={'quality': 95},
+        blank = True
+    )
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -63,10 +69,16 @@ class Blog(models.Model):
 
     thumbnail = ProcessedImageField(
         upload_to=path_and_rename,
-        processors=[ResizeToFill(407, 290)],
+        processors=[ResizeToFill(800, 450)],
         format='JPEG',
         options={'quality': 95},
         blank = True
+    )
+    thumbnail_cat = ImageSpecField(
+        source='thumbnail',
+        processors=[ResizeToFill(385, 217)],
+        format='JPEG',
+        options={'quality': 95},
     )
     banner = ProcessedImageField (
         upload_to=path_and_rename,
