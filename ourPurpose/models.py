@@ -13,7 +13,7 @@ class OurPurpose(models.Model):
 
     thumbnail = ImageSpecField(
         source='image',
-        processors=[ResizeToFill(432, 342)],
+        processors=[ResizeToFill(390, 342)],
         format='JPEG',
         options={'quality': 98},
     )
