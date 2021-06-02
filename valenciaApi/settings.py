@@ -123,7 +123,7 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': os.getenv("DJANGO_DB_NAME"),
         'USER': os.getenv("DJANGO_DB_USER"),
         'PASSWORD': os.getenv("DJANGO_DB_PASSWORD"),
@@ -132,11 +132,15 @@ DATABASES = {
     }
 }
 
-
+EMAIL_HOST = 'smtp.office365.com'
+EMAIL_PORT =  '587'
+EMAIL_HOST_USER = 'seo@valenciatravelcusco.com'
+EMAIL_HOST_PASSWORD = os.getenv("DJANGO_EMAIL_PASSWORD")
+EMAIL_USE_TLS = True
 # Twilio SendGrid
-EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
-SENDGRID_API_KEY = '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'
-SENDGRID_SANDBOX_MODE_IN_DEBUG = False
+# EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
+# SENDGRID_API_KEY = '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'
+# SENDGRID_SANDBOX_MODE_IN_DEBUG = False
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
