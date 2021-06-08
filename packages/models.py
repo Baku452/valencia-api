@@ -346,7 +346,7 @@ class Package(models.Model):
         options={'quality': 100},
         blank = True
     )
-    optional_forRenting = models.ManyToManyField(OptionalRenting, blank=True)
+    optional_forRenting = models.ManyToManyField(OptionalRenting, blank=True, default=False)
     old_overview = HTMLField(blank=True)
     published = models.BooleanField(default=False)
     is_home = models.BooleanField(default=False)

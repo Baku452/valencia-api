@@ -58,6 +58,7 @@ class Blog(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True,  blank=True)
     keywords = models.TextField(default='', blank=True)
     titleSEO = models.TextField(max_length=255, default='', blank=True)
+    summary = models.TextField(max_length=255, default='')
     slug = AutoSlugField(
         populate_from='title',
         unique_with=['title'],
