@@ -62,11 +62,13 @@ class Destination(models.Model):
         upload_to=path_and_rename_destination,
         processors=[ResizeToFill(1600, 700)],
         format='JPEG',
-        options={'quality': 100}
+        options={'quality': 100},
+        blank=True,
+        null=True
     )
 
     thumbnail = ImageSpecField(
-        source='image',
+        source='picture',
         processors=[ResizeToFill(638, 425)],
         format='JPEG',
         options={'quality': 95},
