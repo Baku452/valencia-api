@@ -269,7 +269,7 @@ class OptionalImageRenting(models.Model):
 class Package(models.Model):
     title = models.CharField(max_length=255, default='')
     keywords = models.TextField(default='')
-    titleSEO = models.TextField(max_length=255, default='')
+    titleSEO = models.TextField(max_length=255, default='',blank=True)
     highligths = models.TextField(max_length=255, default='', blank=True)
     price = models.TextField(max_length=255, default='', blank=True)
     offer = models.TextField(max_length=255, default='', blank=True)
@@ -284,7 +284,6 @@ class Package(models.Model):
     description = HTMLField()
     whats_included = HTMLField(default=None, blank=True)
     whats_not_included = HTMLField(default=None, blank=True)
-    video = models.FileField(storage=fs, blank=True, null=True)
     videoURL = models.TextField(blank=True, null=True)
     package_type = models.ManyToManyField(PackageType)
 
@@ -346,7 +345,7 @@ class Package(models.Model):
         options={'quality': 100},
         blank = True
     )
-    optional_forRenting = models.ManyToManyField(OptionalRenting, blank=True, default=False)
+    optional_forRenting = models.ManyToManyField(OptionalRenting, blank=True)
     old_overview = HTMLField(blank=True)
     published = models.BooleanField(default=False)
     is_home = models.BooleanField(default=False)
