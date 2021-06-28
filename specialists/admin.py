@@ -15,7 +15,7 @@ class ContactUsAdmin(admin.ModelAdmin):
 
 @admin.register(ContactUsB2C)
 class ContactUsB2CAdmin(admin.ModelAdmin):
-    readonly_fields=('first_name', 'last_name', 'email', 'country_residence', 'destination_interest', 'number', 'accommodation', 'message', 'is_newsletter', 'adults','children', 'departureDate', 'internationalFlight', 'lengthStay', )
+    readonly_fields=('first_name', 'last_name', 'email', 'country', 'state', 'number', 'city', 'message', 'is_newsletter' )
     pass
 
 @admin.register(ContactUsB2B)

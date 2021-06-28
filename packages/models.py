@@ -26,7 +26,6 @@ ACTIVITY_CHOICES = (
     (2, "High"),
     (3, "Moderate"),
     (4, "Low"),
-    (5, "Very Low"),
 )
 
 DAYS_CHOICES = (
