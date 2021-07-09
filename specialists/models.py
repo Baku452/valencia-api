@@ -67,6 +67,7 @@ class ContactUsB2C(models.Model):
     number = models.CharField(max_length=255, default='')
     package = models.CharField(max_length=255, default='')
     message = models.TextField(max_length=999, default='')
+    extra_data = models.TextField(max_length=999, default='')
     is_newsletter = models.BooleanField(default=False)
     is_promo = models.BooleanField(default=False)
     url = models.CharField(max_length=255, default='')
