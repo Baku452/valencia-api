@@ -351,6 +351,7 @@ class Package(models.Model):
     optional = models.BooleanField(default=False)
     travelZoo = models.BooleanField(default=False)
     promo = models.BooleanField(default=False)
+    incatrail = models.BooleanField(default=False)
     luxury = models.BooleanField(default=False)
     show_specialist = models.BooleanField(default=False)
     recommendations = HTMLField(blank=True)
