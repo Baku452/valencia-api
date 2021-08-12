@@ -65,6 +65,8 @@ TEMPLATES = [
 ]
 
 INSTALLED_APPS = [
+    # "grappelli",
+    "filebrowser",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -92,8 +94,6 @@ INSTALLED_APPS = [
     "popUp",
     "ckeditor",
     "ckeditor_uploader",
-    "grappelli",
-    "filebrowser",
     "blog",
     "django_cleanup",
     "pages",
@@ -183,14 +183,16 @@ DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
 
 TINYMCE_DEFAULT_CONFIG = {
-    "plugins": "link lists autolink",
+    "plugins": "link lists autolink ,media, image",
     "cleanup_on_startup": True,
     "custom_undo_redo_levels": 120,
     "toolbar": "undo redo | bold italic underline strikethrough | alignleft "
     "aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist "
     "fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | "
-    "a11ycheck ltr rtl | showcomments addcomment code",
+    "a11ycheck ltr rtl | showcomments addcomment code ",
+    "height": 450,
 }
+# TINYMCE_FILEBROWSER = False
 
 STATIC_URL = "/static_root/"
 STATICFILES_DIRS = [

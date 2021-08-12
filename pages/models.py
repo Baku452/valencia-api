@@ -1,3 +1,5 @@
+import os
+
 from django.db import models
 from tinymce.models import HTMLField
 from autoslug import AutoSlugField
@@ -20,3 +22,7 @@ class Page(models.Model):
 
     def __str__(self):
         return self.title
+
+    @property
+    def URL(self):
+        return os.getenv("NEXTJS_DOMAIN") + "/pages/%s" % (self.slug)

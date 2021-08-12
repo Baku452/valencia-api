@@ -93,7 +93,7 @@ admin.site.site_header = "Valencia Travel"
 admin.site.site_title = "Valencia Travel"
 
 urlpatterns = [
-    url(r"^admin/filebrowser/", site.urls),
+    path("admin/filebrowser/", site.urls),
     path("grappelli/", include("grappelli.urls")),
     path("admin/", admin.site.urls),
     path("tinymce/", include("tinymce.urls")),
