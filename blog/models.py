@@ -43,6 +43,9 @@ class BlogType(models.Model):
     title = models.CharField(max_length=255)
     active = models.BooleanField(default=False)
     order = models.PositiveIntegerField(default=0, blank=False, null=False)
+    slug = AutoSlugField(
+        populate_from="title", unique_with=["title"], always_update=True
+    )
     thumbnail = ProcessedImageField(
         upload_to=path_and_rename,
         processors=[ResizeToFill(380, 250)],

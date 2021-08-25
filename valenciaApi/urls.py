@@ -76,6 +76,7 @@ from popUp.views import PopUpListApi
 from pages.views import PageApi, PageListApi
 
 
+DIRECTORY = getattr(settings, "FILEBROWSER_DIRECTORY", "uploads/")
 schema_view = get_schema_view(
     openapi.Info(
         title="Valencia Travel API",
