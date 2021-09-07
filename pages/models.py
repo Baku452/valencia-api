@@ -3,13 +3,14 @@ import os
 from django.db import models
 from tinymce.models import HTMLField
 from autoslug import AutoSlugField
+from ckeditor_uploader.fields import RichTextUploadingField
 
 # Create your models here.
 class Page(models.Model):
     title = models.CharField(max_length=255, default="")
     keywords = models.TextField(default="")
     titleSEO = models.TextField(max_length=255, default="", blank=True)
-    content = HTMLField(default=None, blank=True)
+    content = RichTextUploadingField()
     slug = AutoSlugField(
         populate_from="title",
         unique_with=["title"],

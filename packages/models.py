@@ -11,7 +11,7 @@ from smart_selects.db_fields import ChainedForeignKey
 from django.core.files.storage import FileSystemStorage
 import os
 
-fs = FileSystemStorage(location='/media/videos')
+fs = FileSystemStorage(location="/media/videos")
 
 RATING_CHOICES = (
     ("1", "1"),
@@ -87,37 +87,34 @@ MONTHS_CHOICES = (
 
 
 def path_and_rename(instance, filename):
-    upload_to = 'images/packages-thumbnail/'
-    ext = filename.split('.')[-1]
+    upload_to = "images/packages-thumbnail/"
+    ext = filename.split(".")[-1]
     if instance.pk:
-        filename = '{}.{}'.format(instance.slug, ext)
+        filename = "{}.{}".format(instance.slug, ext)
     else:
-        filename = '{}.{}'.format(instance.slug, ext)
+        filename = "{}.{}".format(instance.slug, ext)
     return os.path.join(upload_to, filename)
 
 
 def path_and_rename_package(instance, filename):
 
-    upload_to = 'images/package/'
-    ext = filename.split('.')[-1]
+    upload_to = "images/package/"
+    ext = filename.split(".")[-1]
     if instance.pk:
-        filename = '{}.{}'.format(instance.slug, ext)
+        filename = "{}.{}".format(instance.slug, ext)
     else:
-        filename = '{}.{}'.format(instance.slug, ext)
+        filename = "{}.{}".format(instance.slug, ext)
     return os.path.join(upload_to, filename)
 
 
 class Month(models.Model):
     name = models.CharField(
-        unique=True,
-        max_length=255,
-        choices=MONTHS_CHOICES,
-        default=1
+        unique=True, max_length=255, choices=MONTHS_CHOICES, default=1
     )
 
     class Meta:
-        db_table = 'month'
-        ordering = ('id',)
+        db_table = "month"
+        ordering = ("id",)
 
     def __str__(self):
         return self.name
@@ -128,17 +125,17 @@ class PackageType(models.Model):
     active = models.BooleanField(default=False)
     order = models.PositiveIntegerField(default=0, blank=False, null=False)
     svg = models.FileField(
-        upload_to='images/package_type/',
-        default='',
-        validators=[FileExtensionValidator(['svg'])]
+        upload_to="images/package_type/",
+        default="",
+        validators=[FileExtensionValidator(["svg"])],
     )
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
-        db_table = 'package_type'
-        ordering = ['order']
+        db_table = "package_type"
+        ordering = ["order"]
 
     def __str__(self):
         return self.title
@@ -155,8 +152,8 @@ class Interest(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
-        db_table = 'interest'
-        ordering = ['order']
+        db_table = "interest"
+        ordering = ["order"]
 
     def __str__(self):
         return self.title
@@ -164,24 +161,24 @@ class Interest(models.Model):
 
 class Experience(models.Model):
     title = models.CharField(max_length=255)
-    content = models.TextField(default='')
+    content = models.TextField(default="")
 
     package_type = models.ManyToManyField(PackageType)
 
-    image = models.FileField(upload_to='images/experience/')
+    image = models.FileField(upload_to="images/experience/")
 
     thumbnail = ImageSpecField(
-        source='image',
+        source="image",
         processors=[ResizeToFill(340, 440)],
-        format='JPEG',
-        options={'quality': 98}
+        format="JPEG",
+        options={"quality": 98},
     )
 
     original = ImageSpecField(
-        source='image',
+        source="image",
         processors=[ResizeToFill(1500, 800)],
-        format='JPEG',
-        options={'quality': 98}
+        format="JPEG",
+        options={"quality": 98},
     )
 
     active = models.BooleanField(default=False)
@@ -190,24 +187,22 @@ class Experience(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
-        db_table = 'experience'
+        db_table = "experience"
 
     def __str__(self):
         return self.title
 
 
 class Notification(models.Model):
-    title = models.CharField(max_length=255, default='')
+    title = models.CharField(max_length=255, default="")
 
     slug = AutoSlugField(
-        populate_from='title',
-        unique_with=['title'],
-        always_update=True
+        populate_from="title", unique_with=["title"], always_update=True
     )
 
     content = HTMLField()
 
-    keywords = models.TextField(default='')
+    keywords = models.TextField(default="")
 
     active = models.BooleanField(default=False)
 
@@ -215,12 +210,14 @@ class Notification(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
-        db_table = 'notification'
+        db_table = "notification"
 
     def __str__(self):
         return self.title
+
+
 class OptionalRenting(models.Model):
-    title = models.CharField(max_length=255, default='')
+    title = models.CharField(max_length=255, default="")
     content = HTMLField()
 
     order = models.PositiveIntegerField(default=0, blank=False, null=False)
@@ -229,55 +226,50 @@ class OptionalRenting(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
-        db_table = 'optional_Renting'
-        ordering = ['order']
+        db_table = "optional_Renting"
+        ordering = ["order"]
 
     def __str__(self):
         return self.title
 
+
 class OptionalImageRenting(models.Model):
 
-    alt = models.CharField(max_length=255, default='')
+    alt = models.CharField(max_length=255, default="")
 
-    slug = AutoSlugField(
-        populate_from='alt',
-        unique_with=['alt'],
-        always_update=True
-    )
+    slug = AutoSlugField(populate_from="alt", unique_with=["alt"], always_update=True)
 
     optional_renting = models.ForeignKey(
-        OptionalRenting,
-        related_name='images',
-        default=None,
-        on_delete=models.CASCADE
+        OptionalRenting, related_name="images", default=None, on_delete=models.CASCADE
     )
 
     image = ProcessedImageField(
         upload_to=path_and_rename,
         processors=[ResizeToFill(1000, 700)],
-        format='JPEG',
-        options={'quality': 100}
+        format="JPEG",
+        options={"quality": 100},
     )
 
     class Meta:
-        db_table = 'optionalRenting_Image'
+        db_table = "optionalRenting_Image"
 
     def __str__(self):
         return self.optional_renting.title
 
+
 class Package(models.Model):
-    title = models.CharField(max_length=255, default='')
-    keywords = models.TextField(default='')
-    titleSEO = models.TextField(max_length=255, default='',blank=True)
-    highligths = models.TextField(max_length=255, default='', blank=True)
-    price = models.TextField(max_length=255, default='', blank=True)
-    offer = models.TextField(max_length=255, default='', blank=True)
-    saveUpTo = models.TextField(max_length=255, default='', blank=True)
-    summary = models.TextField(max_length=350, default='')
+    title = models.CharField(max_length=255, default="")
+    keywords = models.TextField(default="")
+    titleSEO = models.TextField(max_length=255, default="", blank=True)
+    highligths = models.TextField(max_length=255, default="", blank=True)
+    rating = models.IntegerField(blank=True, default=0)
+    fixedDepartures = models.TextField(max_length=255, default="", blank=True)
+    price = models.TextField(max_length=255, default="", blank=True)
+    offer = models.TextField(max_length=255, default="", blank=True)
+    saveUpTo = models.TextField(max_length=255, default="", blank=True)
+    summary = models.TextField(max_length=350, default="")
     slug = AutoSlugField(
-        populate_from='title',
-        unique_with=['title'],
-        always_update=True
+        populate_from="title", unique_with=["title"], always_update=True
     )
 
     description = HTMLField()
@@ -298,7 +290,7 @@ class Package(models.Model):
 
     specialist = models.ForeignKey(
         Specialist,
-        related_name='specialist',
+        related_name="specialist",
         default=None,
         on_delete=models.CASCADE,
     )
@@ -309,59 +301,44 @@ class Package(models.Model):
         on_delete=models.CASCADE,
     )
 
-    activity = models.IntegerField(
-        choices=ACTIVITY_CHOICES,
-        default=1
-    )
+    activity = models.IntegerField(choices=ACTIVITY_CHOICES, default=1)
 
-    days = models.IntegerField(
-        choices=DAYS_CHOICES,
-        default=1
-    )
+    days = models.IntegerField(choices=DAYS_CHOICES, default=1)
 
     physical_difficulty = models.CharField(
-        max_length=2,
-        choices=RATING_CHOICES,
-        default='1'
+        max_length=2, choices=RATING_CHOICES, default="1"
     )
 
     cultural_rating = models.CharField(
-        max_length=2,
-        choices=RATING_CHOICES,
-        default='1'
+        max_length=2, choices=RATING_CHOICES, default="1"
     )
 
     wildlife_expectation = models.CharField(
-        max_length=2,
-        choices=RATING_CHOICES,
-        default='1'
+        max_length=2, choices=RATING_CHOICES, default="1"
     )
 
     thumbnail = ProcessedImageField(
         upload_to=path_and_rename,
         processors=[ResizeToFill(390, 230)],
-        format='JPEG',
-        options={'quality': 100},
-        blank = True
+        format="JPEG",
+        options={"quality": 100},
+        blank=True,
     )
     optional_forRenting = models.ManyToManyField(OptionalRenting, blank=True)
-    old_overview = HTMLField(blank=True)
     published = models.BooleanField(default=False)
     is_home = models.BooleanField(default=False)
     optional = models.BooleanField(default=False)
     travelZoo = models.BooleanField(default=False)
     promo = models.BooleanField(default=False)
-    incatrail = models.BooleanField(default=False)
     luxury = models.BooleanField(default=False)
     show_specialist = models.BooleanField(default=False)
     recommendations = HTMLField(blank=True)
-    rating = models.IntegerField(blank=True, default=0)
     featured = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
-        db_table = 'package'
+        db_table = "package"
 
     def __str__(self):
         return self.title
@@ -369,35 +346,26 @@ class Package(models.Model):
 
 class PackageImage(models.Model):
     package = models.ForeignKey(
-        Package,
-        related_name='images',
-        default=None,
-        on_delete=models.CASCADE
+        Package, related_name="images", default=None, on_delete=models.CASCADE
     )
-    alt = models.CharField(max_length=255, default='')
+    alt = models.CharField(max_length=255, default="")
 
-    slug = AutoSlugField(
-        populate_from='alt',
-        unique_with=['alt'],
-        always_update=True
-    )
+    slug = AutoSlugField(populate_from="alt", unique_with=["alt"], always_update=True)
 
     image = ProcessedImageField(
         upload_to=path_and_rename_package,
-        # processors=[ResizeToFill(1600, 700)],
-        format='JPEG',
-        options={'quality': 100}
+        processors=[ResizeToFill(1600, 700)],
+        format="JPEG",
+        options={"quality": 100},
     )
 
     class Meta:
-        db_table = 'package_image'
+        db_table = "package_image"
 
     def __str__(self):
         return self.alt
 
     def image_tag(self):
-        return mark_safe('<img src="/media/%s" width="150" height="150" />' % self.image)
-
-
-
-
+        return mark_safe(
+            '<img src="/media/%s" width="150" height="150" />' % self.image
+        )
