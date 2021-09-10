@@ -64,7 +64,7 @@ class ContactB2CCreateApi(APIView):
                 + " "
                 + serializer.data["last_name"]
                 + from_email,
-                [to],
+                to,
                 html_message=render_to_string(
                     "contactTemplateB2C.html", serializer.data
                 ),
@@ -86,7 +86,7 @@ class ContactB2BCreateApi(APIView):
                 else subjectB2B + serializer.data["package"],
                 plain_message,
                 serializer.data["company"] + from_email,
-                [to],
+                to,
                 html_message=render_to_string(
                     "contactTemplateB2B.html", serializer.data
                 ),
@@ -107,7 +107,7 @@ class TailorMadeCreateApi(APIView):
                 + " "
                 + serializer.data["last_name"]
                 + from_email,
-                [to],
+                to,
                 html_message=render_to_string("tailor_made.html", serializer.data),
             )
             return Response(serializer.data, status=status.HTTP_201_CREATED)
