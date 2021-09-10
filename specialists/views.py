@@ -29,7 +29,7 @@ subjectB2B = "Web Opportunity B2B "
 html_message = render_to_string("mail_template.html", {"context": "values"})
 plain_message = strip_tags(html_message)
 from_email = os.getenv("DJANGO_FROM_MAIL")
-to = os.getenv("DJANGO_TO_MAIL")
+to = os.getenv("DJANGO_TO_MAIL").split(",")
 
 
 class ContactCreateApi(APIView):
@@ -44,7 +44,7 @@ class ContactCreateApi(APIView):
                 + " "
                 + serializer.data["last_name"]
                 + from_email,
-                ["seo@valenciatravelcusco.com", "aiacos452@gmail.com"],
+                to,
                 html_message=render_to_string("contactTemplate.html", serializer.data),
             )
             return Response(serializer.data, status=status.HTTP_201_CREATED)
