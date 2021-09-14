@@ -1,14 +1,22 @@
 from django.contrib import admin
-from .models import Package, PackageImage, PackageType, Month, Experience, Interest, Notification, OptionalImageRenting, OptionalRenting
+from .models import (
+    Package,
+    PackageImage,
+    PackageType,
+    Month,
+    Experience,
+    Interest,
+    Notification,
+    OptionalImageRenting,
+    OptionalRenting,
+)
 from itineraries.models import (
     Itinerary,
     Faq,
     DatesAndPrices,
     ItineraryImage,
 )
-from old_itinerario.models import (
-    ItineraryOld
-)
+from old_itinerario.models import ItineraryOld
 from adminsortable2.admin import SortableAdminMixin
 from modelclone import ClonableModelAdmin
 from nested_inline.admin import NestedStackedInline, NestedModelAdmin
@@ -17,7 +25,6 @@ from nested_inline.admin import NestedStackedInline, NestedModelAdmin
 class DatesAndPricesAdmin(admin.StackedInline):
     model = DatesAndPrices
     extra = 0
-
 
 
 class OptionalRentingAdmin(admin.StackedInline):
@@ -42,29 +49,38 @@ class ItineraryAdmin(admin.StackedInline):
     extra = 0
     # inlines = [ItineraryImageAdmin]
 
+
 class ItineraryOldAdmin(admin.StackedInline):
     model = ItineraryOld
     extra = 0
 
+
 class PackageImageAdmin(admin.TabularInline):
     model = PackageImage
     extra = 0
-    fields = ['image', 'alt', 'image_tag']
-    readonly_fields = ['image_tag']
+    fields = ["image", "alt", "image_tag"]
+    readonly_fields = ["image_tag"]
     inlines = ""
-
 
 
 @admin.register(Package)
 class PackageAdmin(admin.ModelAdmin):
-    list_display = ('title', 'rating','days','destination', 'published', 'optional')
-    search_fields = ('title', 'destination__title', 'optional')
+    list_display = (
+        "title",
+        "rating",
+        "days",
+        "destination",
+        "published",
+        "optional",
+        "travelZoo",
+    )
+    search_fields = ("title", "destination__title", "optional")
     inlines = [
         PackageImageAdmin,
         ItineraryAdmin,
         ItineraryOldAdmin,
         FaqAdmin,
-        DatesAndPricesAdmin
+        DatesAndPricesAdmin,
     ]
     # save_as = True
     class Meta:
@@ -98,16 +114,16 @@ class NotificationAdmin(admin.ModelAdmin):
 
 class OptionalRentingImageAdmin(NestedStackedInline):
     model = OptionalImageRenting
-    extra = 0 
+    extra = 0
+
+
 @admin.register(OptionalRenting)
 class OptionalRentingAdmin(admin.ModelAdmin):
-    
+
     inlines = [OptionalRentingImageAdmin]
- 
 
     class Meta:
         model = OptionalRenting
-
 
 
 # Register your models here.
