@@ -92,8 +92,6 @@ class PackageTypeHomeSerializer(serializers.ModelSerializer):
 
 
 class PackageTypeNavSerializer(serializers.ModelSerializer):
-    thumbnail = serializers.ImageField(read_only=True)
-
     class Meta:
         model = PackageType
         fields = ["id", "title", "svg"]
