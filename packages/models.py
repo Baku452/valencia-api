@@ -122,6 +122,7 @@ class Month(models.Model):
 
 class PackageType(models.Model):
     title = models.CharField(max_length=255)
+    content = models.TextField(default="")
     active = models.BooleanField(default=False)
     order = models.PositiveIntegerField(default=0, blank=False, null=False)
     svg = models.FileField(
@@ -132,6 +133,20 @@ class PackageType(models.Model):
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    image = models.FileField(upload_to="images/package_type/", blank=False, null=True)
+    thumbnail = ImageSpecField(
+        source="image",
+        processors=[ResizeToFill(340, 440)],
+        format="JPEG",
+        options={"quality": 98},
+    )
+
+    original = ImageSpecField(
+        source="image",
+        processors=[ResizeToFill(1500, 800)],
+        format="JPEG",
+        options={"quality": 98},
+    )
 
     class Meta:
         db_table = "package_type"
@@ -277,12 +292,6 @@ class Package(models.Model):
     whats_not_included = HTMLField(default=None, blank=True)
     videoURL = models.TextField(blank=True, null=True)
     package_type = models.ManyToManyField(PackageType)
-
-    related_packages = models.ManyToManyField(
-        "self",
-        blank=True,
-        default=None,
-    )
 
     interest = models.ManyToManyField(Interest)
 
