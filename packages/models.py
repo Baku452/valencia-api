@@ -338,6 +338,7 @@ class Package(models.Model):
     is_home = models.BooleanField(default=False)
     optional = models.BooleanField(default=False)
     travelZoo = models.BooleanField(default=False)
+    bookingWindow = models.BooleanField(default=False)
     promo = models.BooleanField(default=False)
     luxury = models.BooleanField(default=False)
     show_specialist = models.BooleanField(default=False)

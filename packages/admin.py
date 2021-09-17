@@ -73,6 +73,7 @@ class PackageAdmin(admin.ModelAdmin):
         "published",
         "optional",
         "travelZoo",
+        "bookingWindow",
     )
     search_fields = ("title", "destination__title", "optional")
     inlines = [
