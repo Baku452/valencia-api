@@ -21,6 +21,7 @@ from .serializers import (
     PackageDetailTypesSerializer,
     InterestSerializer,
     NotificationSerializer,
+    NotificationContentSerializer,
     OptionalRentingSerializer,
     PackageTitleSerializer,
     PackageHomeSerializer,
@@ -63,7 +64,7 @@ class PackageRetrieveApi(APIView):
 class NotificationRetrieveApi(APIView):
     def get(self, request, slug):
         notification = get_object_notify(slug)
-        serializer = NotificationSerializer(notification)
+        serializer = NotificationContentSerializer(notification)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 

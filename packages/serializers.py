@@ -38,6 +38,12 @@ class NotificationSerializer(serializers.ModelSerializer):
         fields = ["id", "title", "slug"]
 
 
+class NotificationContentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Notification
+        fields = ["id", "title", "slug", "content"]
+
+
 class InterestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Interest
