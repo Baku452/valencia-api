@@ -74,6 +74,10 @@ from history.views import (
     HistoryApi,
 )
 
+from reviews.views import (
+    TripadvisorReviewAPI,
+)
+
 from popUp.views import PopUpListApi
 from pages.views import PageApi, PageListApi
 
@@ -174,5 +178,7 @@ urlpatterns = [
     path("blog/list/", BlogListApi.as_view(), name="blog-list"),
     path("pages/list/", PageListApi.as_view(), name="page-SLUG"),
     path("pages/<str:slug>", PageApi.as_view(), name="page-list"),
+
+    path("tripadvisorReviews/", TripadvisorReviewAPI.as_view(), name="trip-advisor"),
     url(r"^ckeditor/", include("ckeditor_uploader.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

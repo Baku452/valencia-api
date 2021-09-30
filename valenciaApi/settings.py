@@ -97,6 +97,7 @@ INSTALLED_APPS = [
     "blog",
     "django_cleanup",
     "pages",
+    "reviews",
 ]
 
 CKEDITOR_UPLOAD_PATH = "uploads"
