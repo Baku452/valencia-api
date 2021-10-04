@@ -334,6 +334,7 @@ class Package(models.Model):
         blank=True,
     )
     optional_forRenting = models.ManyToManyField(OptionalRenting, blank=True)
+    incatrail = models.BooleanField(default=False)
     published = models.BooleanField(default=False)
     is_home = models.BooleanField(default=False)
     optional = models.BooleanField(default=False)
