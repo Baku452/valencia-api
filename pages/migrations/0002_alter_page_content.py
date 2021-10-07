@@ -7,13 +7,13 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pages', '0001_initial'),
+        ("pages", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='page',
-            name='content',
+            model_name="page",
+            name="content",
             field=ckeditor_uploader.fields.RichTextUploadingField(),
         ),
     ]
