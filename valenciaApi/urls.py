@@ -28,7 +28,14 @@ from drf_yasg2 import openapi
 from filebrowser.sites import site
 
 from destinations.views import DestinationListApi, BannerListApi
-from blog.views import BlogTypeListApi, BlogRetrieveApi, BlogSearchApi, BlogListApi
+from blog.views import (
+    BlogTypeListApi,
+    BlogRetrieveApi,
+    BlogSearchApi,
+    BlogListApi,
+    BloggerListApi,
+    BloggerRetrieveApi,
+)
 
 from packages.views import (
     PackageTypeListApi,
@@ -176,9 +183,10 @@ urlpatterns = [
     path("blogtypes/", BlogTypeListApi.as_view(), name="blog-types"),
     path("blog/", BlogSearchApi.as_view(), name="blog-search"),
     path("blog/list/", BlogListApi.as_view(), name="blog-list"),
+    path("blogger/list/", BloggerListApi.as_view(), name="blogger-list"),
+    path("blogger/<int:user>", BloggerRetrieveApi.as_view(), name="blog-list"),
     path("pages/list/", PageListApi.as_view(), name="page-SLUG"),
     path("pages/<str:slug>", PageApi.as_view(), name="page-list"),
-
     path("tripadvisorReviews/", TripadvisorReviewAPI.as_view(), name="trip-advisor"),
     url(r"^ckeditor/", include("ckeditor_uploader.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

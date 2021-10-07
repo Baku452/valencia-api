@@ -37,6 +37,16 @@ def path_and_rename_package(instance, filename):
 class Blogger(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     biography = models.CharField(max_length=100)
+    image = ProcessedImageField(
+        upload_to="images/blogger/",
+        processors=[ResizeToFill(400, 600)],
+        format="JPEG",
+        options={"quality": 95},
+        blank=True,
+    )
+
+    def __str__(self):
+        return self.user.username
 
 
 class BlogType(models.Model):

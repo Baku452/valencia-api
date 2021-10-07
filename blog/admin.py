@@ -40,4 +40,5 @@ class UserAdmin(BaseUserAdmin):
 
 
 admin.site.unregister(User)
+admin.site.register(Blogger)
 admin.site.register(User, UserAdmin)
