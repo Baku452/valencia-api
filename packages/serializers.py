@@ -125,6 +125,8 @@ class PackageDetailSerializer(serializers.ModelSerializer):
     faqs = FaqSerializer(many=True, read_only=True)
     optional_forRenting = OptionalRentingSerializer(many=True, read_only=True)
     dates_prices = DatesAndPricesSerializer(many=True, read_only=True)
+    destination_name = serializers.StringRelatedField(source="destination")
+
 
     class Meta:
         model = Package
