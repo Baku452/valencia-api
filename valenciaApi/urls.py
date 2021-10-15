@@ -85,6 +85,8 @@ from reviews.views import (
     TripadvisorReviewAPI,
 )
 
+from press.views import AwardsListApi, PressPostsListApi
+
 from popUp.views import PopUpListApi
 from pages.views import PageApi, PageListApi
 
@@ -188,5 +190,7 @@ urlpatterns = [
     path("pages/list/", PageListApi.as_view(), name="page-SLUG"),
     path("pages/<str:slug>", PageApi.as_view(), name="page-list"),
     path("tripadvisorReviews/", TripadvisorReviewAPI.as_view(), name="trip-advisor"),
+    path("awardslist/", AwardsListApi.as_view(), name="award-list"),
+    path("press-posts/", PressPostsListApi.as_view(), name="press-list"),
     url(r"^ckeditor/", include("ckeditor_uploader.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
