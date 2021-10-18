@@ -64,7 +64,7 @@ class PackageImageAdmin(admin.TabularInline):
 
 
 @admin.register(Package)
-class PackageAdmin(admin.ModelAdmin):
+class PackageAdmin(SortableAdminMixin, admin.ModelAdmin):
     list_display = (
         "title",
         "rating",
@@ -74,6 +74,7 @@ class PackageAdmin(admin.ModelAdmin):
         "optional",
         "travelZoo",
         "bookingWindow",
+        "is_home",
     )
     search_fields = ("title", "destination__title", "optional")
     inlines = [

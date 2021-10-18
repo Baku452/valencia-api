@@ -347,9 +347,11 @@ class Package(models.Model):
     featured = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    order = models.PositiveIntegerField(default=0, blank=False, null=False)
 
     class Meta:
         db_table = "package"
+        ordering = ["order"]
 
     def __str__(self):
         return self.title
