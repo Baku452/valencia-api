@@ -28,6 +28,8 @@ django-ckeditor = "*"
 django-filebrowser = "*"
 django-grappelli = "*"
 django-cleanup = "*"
+djangorestframework-simplejwt = "*"
+djoser = "*"
 
 [requires]
 python_version = "3.8"

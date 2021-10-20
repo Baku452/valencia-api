@@ -90,6 +90,11 @@ from press.views import AwardsListApi, PressPostsListApi
 from popUp.views import PopUpListApi
 from pages.views import PageApi, PageListApi
 
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+
 
 DIRECTORY = getattr(settings, "FILEBROWSER_DIRECTORY", "uploads/")
 schema_view = get_schema_view(
@@ -107,6 +112,7 @@ schema_view = get_schema_view(
 
 admin.site.site_header = "Valencia Travel"
 admin.site.site_title = "Valencia Travel"
+
 
 urlpatterns = [
     path("admin/filebrowser/", site.urls),
@@ -193,4 +199,7 @@ urlpatterns = [
     path("awardslist/", AwardsListApi.as_view(), name="award-list"),
     path("press-posts/", PressPostsListApi.as_view(), name="press-list"),
     url(r"^ckeditor/", include("ckeditor_uploader.urls")),
+    path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    url(r"^auth/", include("djoser.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
