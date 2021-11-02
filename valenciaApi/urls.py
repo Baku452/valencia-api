@@ -64,7 +64,8 @@ from old_itinerario.views import ItineraryOldRetrieveApi
 
 from specialists.views import (
     ContactCreateApi,
-    NewsletterCreateApi,
+    NewsletterDetailApi,
+    NewsletterListApi,
     ContactB2BCreateApi,
     ContactB2CCreateApi,
     TailorMadeCreateApi,
@@ -154,7 +155,12 @@ urlpatterns = [
     path("contact_b2c/", ContactB2CCreateApi.as_view(), name="contact_b2c-create"),
     path("contact_b2b/", ContactB2BCreateApi.as_view(), name="contact_b2b-create"),
     path("tailorForm/", TailorMadeCreateApi.as_view(), name="tailorForm-create"),
-    path("newsletter/", NewsletterCreateApi.as_view(), name="newsletter-create"),
+    path("newsletter/", NewsletterListApi.as_view(), name="newsletter-create"),
+    path(
+        "newsletter/<str:email>",
+        NewsletterDetailApi.as_view(),
+        name="newsletter-detail",
+    ),
     path("packages/home/", PackageHomeListApi.as_view(), name="packages-search"),
     path("packages/", PackageSearchApi.as_view(), name="packages-search"),
     path("packages/titles/", PackageTitleApi.as_view(), name="packages-titles"),

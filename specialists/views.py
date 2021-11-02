@@ -11,7 +11,7 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.core.mail import send_mail, send_mass_mail
 
-# from .models import ContactUs, Newsletter
+from .models import ContactUs, Newsletter
 from .serializers import (
     ContactUsSerializer,
     NewsletterSerializer,
@@ -114,10 +114,33 @@ class TailorMadeCreateApi(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class NewsletterCreateApi(APIView):
+class NewsletterListApi(APIView):
+    def get(self, request, format=None):
+        suscriptores = Newsletter.objects.all()
+        serializer = NewsletterSerializer(suscriptores, many=True)
+        return Response(serializer.data)
+
     def post(self, request):
         serializer = NewsletterSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class NewsletterDetailApi(APIView):
+    def get_object(self, email):
+        try:
+            return Newsletter.objects.get(email=email)
+        except Newsletter.DoesNotExist:
+            raise Http404
+
+    def get(self, request, email):
+        subscriptor = self.get_object(email)
+        serializer = NewsletterSerializer(subscriptor)
+        return Response(serializer.data)
+
+    def delete(self, request, email):
+        subcriptor = self.get_object(email)
+        subcriptor.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
