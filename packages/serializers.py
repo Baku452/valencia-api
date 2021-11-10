@@ -62,7 +62,7 @@ class PackageSerializer(serializers.ModelSerializer):
     thumbnail = serializers.ImageField(read_only=True)
     type_name = serializers.StringRelatedField(many=True, source="package_type")
     destination_name = serializers.StringRelatedField(source="destination")
-    activity_name = serializers.StringRelatedField(source="activity")
+    activity_name = serializers.CharField(source="get_activity_display")
 
     class Meta:
         model = Package
@@ -127,6 +127,7 @@ class PackageDetailSerializer(serializers.ModelSerializer):
     dates_prices = DatesAndPricesSerializer(many=True, read_only=True)
     destination_name = serializers.StringRelatedField(source="destination")
     type_name = serializers.StringRelatedField(many=True, source="package_type")
+    activity_name = serializers.CharField(source="get_activity_display")
 
     class Meta:
         model = Package
