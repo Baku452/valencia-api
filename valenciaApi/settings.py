@@ -100,6 +100,7 @@ INSTALLED_APPS = [
     "reviews",
     "press",
     "djoser",
+    "ourteam",
 ]
 
 CKEDITOR_UPLOAD_PATH = "uploads"

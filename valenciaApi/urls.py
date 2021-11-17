@@ -91,6 +91,8 @@ from press.views import AwardsListApi, PressPostsListApi
 from popUp.views import PopUpListApi
 from pages.views import PageApi, PageListApi
 
+from ourteam.views import CollaboratorsListApi, CollaboratorRetrieveApi
+
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -201,6 +203,12 @@ urlpatterns = [
     path("blogger/<int:user>", BloggerRetrieveApi.as_view(), name="blog-list"),
     path("pages/list/", PageListApi.as_view(), name="page-SLUG"),
     path("pages/<str:slug>", PageApi.as_view(), name="page-list"),
+    path("collaborators/", CollaboratorsListApi.as_view(), name="collaborators-list"),
+    path(
+        "collaborators/<str:slug>",
+        CollaboratorRetrieveApi.as_view(),
+        name="collaborators-retrievet",
+    ),
     path("tripadvisorReviews/", TripadvisorReviewAPI.as_view(), name="trip-advisor"),
     path("awardslist/", AwardsListApi.as_view(), name="award-list"),
     path("press-posts/", PressPostsListApi.as_view(), name="press-list"),
