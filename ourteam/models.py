@@ -2,7 +2,7 @@ from django.db import models
 from imagekit.processors import ResizeToFill
 from imagekit.models import ImageSpecField, ProcessedImageField
 from autoslug import AutoSlugField
-
+from tinymce.models import HTMLField
 
 # Create your models here.
 
@@ -12,6 +12,7 @@ class Collaborator(models.Model):
     last_name = models.CharField(max_length=255, default="")
     job = models.CharField(max_length=255, default="")
     description = models.TextField(default="")
+    hobbies = HTMLField(default="")
     order = models.PositiveIntegerField(default=0, blank=False, null=False)
 
     slug = AutoSlugField(
