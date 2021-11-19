@@ -7,22 +7,22 @@ import os
 
 
 def path_and_rename(instance, filename):
-    upload_to = 'images/banner/'
-    ext = filename.split('.')[-1]
+    upload_to = "images/banner/"
+    ext = filename.split(".")[-1]
     if instance.pk:
-        filename = '{}.{}'.format(instance.slug, ext)
+        filename = "{}.{}".format(instance.slug, ext)
     else:
-        filename = '{}.{}'.format(instance.slug, ext)
+        filename = "{}.{}".format(instance.slug, ext)
     return os.path.join(upload_to, filename)
 
 
 def path_and_rename_destination(instance, filename):
-    upload_to = 'images/destination/'
-    ext = filename.split('.')[-1]
+    upload_to = "images/destination/"
+    ext = filename.split(".")[-1]
     if instance.pk:
-        filename = '{}.{}'.format(instance.slug, ext)
+        filename = "{}.{}".format(instance.slug, ext)
     else:
-        filename = '{}.{}'.format(instance.slug, ext)
+        filename = "{}.{}".format(instance.slug, ext)
     return os.path.join(upload_to, filename)
 
 
@@ -31,10 +31,10 @@ class Country(models.Model):
     active = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    
+
     class Meta:
-        db_table = 'country'
-        verbose_name_plural = 'Countries'
+        db_table = "country"
+        verbose_name_plural = "Countries"
 
     def __str__(self):
         return self.name
@@ -43,17 +43,10 @@ class Country(models.Model):
 class Destination(models.Model):
     title = models.CharField(max_length=255)
 
-    sub_title = models.CharField(
-        max_length=255,
-        default='',
-        blank=True
-
-    )
+    sub_title = models.CharField(max_length=255, default="", blank=True)
 
     slug = AutoSlugField(
-        populate_from='title',
-        unique_with=['title'],
-        always_update=True
+        populate_from="title", unique_with=["title"], always_update=True
     )
 
     order = models.PositiveIntegerField(default=0, blank=False, null=False)
@@ -61,26 +54,23 @@ class Destination(models.Model):
     picture = ProcessedImageField(
         upload_to=path_and_rename_destination,
         processors=[ResizeToFill(1600, 700)],
-        format='JPEG',
-        options={'quality': 100},
+        format="JPEG",
+        options={"quality": 100},
         blank=True,
-        null=True
+        null=True,
     )
 
     thumbnail = ImageSpecField(
-        source='picture',
+        source="picture",
         processors=[ResizeToFill(638, 425)],
-        format='JPEG',
-        options={'quality': 95},
+        format="JPEG",
+        options={"quality": 95},
     )
 
     content = HTMLField()
 
     country = models.ForeignKey(
-        Country,
-        default=None,
-        related_name='destinations',
-        on_delete=models.CASCADE
+        Country, default=None, related_name="destinations", on_delete=models.CASCADE
     )
 
     tailor_made = models.BooleanField(default=False)
@@ -89,8 +79,8 @@ class Destination(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
-        db_table = 'destination'
-        ordering = ['order']
+        db_table = "destination"
+        ordering = ["order"]
 
     def __str__(self):
         return self.title
@@ -100,27 +90,25 @@ class Banner(models.Model):
     name = models.CharField(max_length=255)
     subtitle = models.CharField(max_length=255, blank=True, default="")
     active = models.BooleanField(default=False)
+    haveCTA = models.BooleanField(default=False)
+    extraCTA = models.CharField(max_length=255, blank=True, null=True)
     order = models.PositiveIntegerField(default=0, blank=False, null=False)
 
-    slug = AutoSlugField(
-        populate_from='name',
-        unique_with=['name'],
-        always_update=True
-    )
+    slug = AutoSlugField(populate_from="name", unique_with=["name"], always_update=True)
 
     image = ProcessedImageField(
         upload_to=path_and_rename,
         processors=[ResizeToFill(1600, 700)],
-        format='JPEG',
-        options={'quality': 100}
+        format="JPEG",
+        options={"quality": 100},
     )
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
-        db_table = 'banner'
-        ordering = ['order']
+        db_table = "banner"
+        ordering = ["order"]
 
     def __str__(self):
         return self.name
