@@ -18,6 +18,7 @@ class SpecialistAdmin(admin.ModelAdmin):
 
 @admin.register(ContactUs)
 class ContactUsAdmin(admin.ModelAdmin):
+    list_display = ("first_name", "last_name", "email", "created")
     readonly_fields = (
         "first_name",
         "last_name",
@@ -32,6 +33,7 @@ class ContactUsAdmin(admin.ModelAdmin):
 
 @admin.register(ContactUsB2C)
 class ContactUsB2CAdmin(admin.ModelAdmin):
+    list_display = ("first_name", "last_name", "email", "created")
     readonly_fields = (
         "first_name",
         "last_name",
@@ -48,6 +50,7 @@ class ContactUsB2CAdmin(admin.ModelAdmin):
 
 @admin.register(ContactUsB2B)
 class ContactUsB2BAdmin(admin.ModelAdmin):
+    list_display = ("first_name", "email", "created")
     readonly_fields = (
         "first_name",
         "last_name",
