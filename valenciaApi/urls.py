@@ -35,6 +35,7 @@ from blog.views import (
     BlogListApi,
     BloggerListApi,
     BloggerRetrieveApi,
+    BlogInterestListApi,
 )
 
 from packages.views import (
@@ -197,6 +198,7 @@ urlpatterns = [
     path("popup/", PopUpListApi.as_view(), name="popup-retrieve"),
     path("blog/<str:slug>", BlogRetrieveApi.as_view(), name="blog-retrieve"),
     path("blogtypes/", BlogTypeListApi.as_view(), name="blog-types"),
+    path("bloginterest/", BlogInterestListApi.as_view(), name="blog-interest"),
     path("blog/", BlogSearchApi.as_view(), name="blog-search"),
     path("blog/list/", BlogListApi.as_view(), name="blog-list"),
     path("blogger/list/", BloggerListApi.as_view(), name="blogger-list"),

@@ -74,6 +74,24 @@ class BlogType(models.Model):
         return self.title
 
 
+class BlogInterest(models.Model):
+    title = models.CharField(max_length=255)
+    active = models.BooleanField(default=False)
+    order = models.PositiveIntegerField(default=0, blank=False, null=False)
+    slug = AutoSlugField(
+        populate_from="title", unique_with=["title"], always_update=True
+    )
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = "blog_interest"
+        ordering = ["order"]
+
+    def __str__(self):
+        return self.title
+
+
 class Blog(models.Model):
     title = models.CharField(max_length=255, default="")
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
@@ -85,8 +103,10 @@ class Blog(models.Model):
     )
 
     content = RichTextUploadingField()
-    blog_type = models.ManyToManyField(BlogType, blank=True)
-
+    blog_type = models.ForeignKey(
+        BlogType, on_delete=models.CASCADE, null=True, blank=True
+    )
+    blog_interest = models.ManyToManyField(BlogInterest, blank=True)
     thumbnail = ProcessedImageField(
         upload_to=path_and_rename,
         processors=[ResizeToFill(800, 450)],

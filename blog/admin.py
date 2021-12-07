@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Blog, BlogType, Blogger
+from .models import Blog, BlogType, Blogger, BlogInterest
 from adminsortable2.admin import SortableAdminMixin
 from modelclone import ClonableModelAdmin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
@@ -26,6 +26,11 @@ class BlogAdmin(ClonableModelAdmin):
 
 @admin.register(BlogType)
 class BlogTypeAdmin(SortableAdminMixin, admin.ModelAdmin):
+    pass
+
+
+@admin.register(BlogInterest)
+class BlogInterestAdmin(SortableAdminMixin, admin.ModelAdmin):
     pass
 
 

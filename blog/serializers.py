@@ -1,4 +1,4 @@
-from .models import Blog, BlogType, Blogger
+from .models import Blog, BlogType, Blogger, BlogInterest
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from django.db.models.functions import Concat
@@ -10,12 +10,18 @@ class BlogTypeSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class BlogInterestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BlogInterest
+        fields = "__all__"
+
+
 class BlogDetailSerializer(serializers.ModelSerializer):
     first_name = serializers.ReadOnlyField(source="author.first_name")
     last_name = serializers.ReadOnlyField(source="author.last_name")
     destination = serializers.SlugRelatedField(read_only=True, slug_field="title")
-    blog_type = serializers.SlugRelatedField(many=True, read_only=True, slug_field="id")
-    type_name = serializers.StringRelatedField(many=True, source="blog_type")
+    blog_type = serializers.SlugRelatedField(read_only=True, slug_field="id")
+    type_name = serializers.StringRelatedField(source="blog_type")
     created = serializers.DateTimeField(
         format="%d-%m-%Y", required=False, read_only=True
     )
@@ -31,7 +37,7 @@ class BlogDetailSerializer(serializers.ModelSerializer):
 
 class BlogDetailTypesSerializer(serializers.ModelSerializer):
 
-    blog_type = BlogTypeSerializer(many=True, read_only=True)
+    blog_type = BlogTypeSerializer(read_only=True)
 
     class Meta:
         model = Blog
@@ -42,9 +48,7 @@ class BlogSerializer(serializers.ModelSerializer):
     # thumbnail = serializers.ImageField(read_only=True)
     first_name = serializers.ReadOnlyField(source="author.first_name")
     last_name = serializers.ReadOnlyField(source="author.last_name")
-    blog_type = serializers.SlugRelatedField(
-        many=True, read_only=True, slug_field="title"
-    )
+    blog_type = serializers.SlugRelatedField(read_only=True, slug_field="title")
     destination = serializers.SlugRelatedField(read_only=True, slug_field="title")
 
     class Meta:

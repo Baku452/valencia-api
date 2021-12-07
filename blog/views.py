@@ -8,7 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 
 
 # Create your views here.
-from .models import Blog, BlogType, Destination, Blogger
+from .models import Blog, BlogType, Destination, Blogger, BlogInterest
 
 from .serializers import (
     BlogDetailSerializer,
@@ -16,6 +16,7 @@ from .serializers import (
     BlogDetailTypesSerializer,
     BlogSerializer,
     BloggerSerializer,
+    BlogInterestSerializer,
 )
 
 from rest_framework import generics
@@ -54,20 +55,38 @@ class BlogTypeListApi(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+class BlogInterestListApi(APIView):
+    def get(self, request):
+        interest = BlogInterest.objects.all().filter(active=True)
+        serializer = BlogInterestSerializer(interest, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
 class BlogFilter(filters.FilterSet):
-    destination = NumberInFilter(field_name="destination", lookup_expr="in")
+    destination = NumberInFilter(field_name="destination__id", lookup_expr="in")
     types = NumberInFilter(field_name="blog_type__id", lookup_expr="in")
+    interest = NumberInFilter(field_name="blog_interest__id", lookup_expr="in")
 
     class Meta:
         model = Blog
-        fields = ["destination", "types"]
+        fields = ["destination", "types", "interest"]
 
 
 class BlogSearchApi(generics.ListAPIView):
+
     queryset = Blog.objects.all().filter(published=True).order_by("-created").distinct()
     serializer_class = BlogDetailSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_class = BlogFilter
+
+    # def get_queryset(self):
+    #     queryset = (
+    #         Blog.objects.all().filter(published=True).order_by("-created").distinct()
+    #     )
+    #     interest = self.request.query_params.get("interest")
+    #     if interest is not None:
+    #         queryset = queryset.filter(blog_interest__id=interest)
+    #     return queryset
 
 
 class BlogListApi(generics.ListAPIView):
