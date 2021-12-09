@@ -106,3 +106,13 @@ class BloggerRetrieveApi(APIView):
 class BloggerListApi(generics.ListAPIView):
     queryset = Blogger.objects.all().distinct()
     serializer_class = BloggerSerializer
+
+
+class BlogPopular(generics.ListAPIView):
+    queryset = (
+        Blog.objects.all()
+        .filter(published=True, popular=True)
+        .order_by("-created")
+        .distinct()[:4]
+    )
+    serializer_class = BlogDetailSerializer

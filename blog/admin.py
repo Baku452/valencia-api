@@ -11,7 +11,7 @@ from django.contrib.auth.models import User
 @admin.register(Blog)
 class BlogAdmin(ClonableModelAdmin):
     # exclude = ('author',)
-    list_display = ("title", "published")
+    list_display = ("title", "author", "published", "popular")
     search_fields = ("title", "destination__title")
 
     def save_model(self, request, obj, form, change):

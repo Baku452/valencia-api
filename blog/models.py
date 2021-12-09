@@ -95,6 +95,7 @@ class BlogInterest(models.Model):
 class Blog(models.Model):
     title = models.CharField(max_length=255, default="")
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    time_reading = models.IntegerField(default=0, blank=True)
     keywords = models.TextField(default="", blank=True)
     titleSEO = models.TextField(max_length=255, default="", blank=True)
     summary = models.TextField(max_length=255, default="")
@@ -132,6 +133,7 @@ class Blog(models.Model):
         default=None,
         on_delete=models.CASCADE,
     )
+    popular = models.BooleanField(default=False)
     published = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
