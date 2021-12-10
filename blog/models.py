@@ -123,9 +123,8 @@ class Blog(models.Model):
     )
     banner = ProcessedImageField(
         upload_to=path_and_rename,
-        processors=[ResizeToFill(1200, 700)],
+        processors=[ResizeToFill(1900, 500)],
         format="JPEG",
-        options={"quality": 90},
         blank=True,
     )
     destination = models.ForeignKey(
