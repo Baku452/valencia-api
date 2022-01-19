@@ -60,11 +60,12 @@ class Destination(models.Model):
         null=True,
     )
 
-    thumbnail = ImageSpecField(
-        source="image",
-        processors=[ResizeToFill(638, 425)],
+    thumbnail = ProcessedImageField(
+        upload_to=path_and_rename_destination,
+        processors=[ResizeToFill(300, 450)],
         format="JPEG",
-        options={"quality": 95},
+        blank=True,
+        null=True,
     )
 
     content = HTMLField()
