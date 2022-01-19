@@ -51,9 +51,9 @@ class Destination(models.Model):
 
     order = models.PositiveIntegerField(default=0, blank=False, null=False)
 
-    picture = ProcessedImageField(
+    image = ProcessedImageField(
         upload_to=path_and_rename_destination,
-        processors=[ResizeToFill(1600, 700)],
+        processors=[ResizeToFill(1900, 500)],
         format="JPEG",
         options={"quality": 100},
         blank=True,
@@ -61,7 +61,7 @@ class Destination(models.Model):
     )
 
     thumbnail = ImageSpecField(
-        source="picture",
+        source="image",
         processors=[ResizeToFill(638, 425)],
         format="JPEG",
         options={"quality": 95},

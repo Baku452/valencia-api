@@ -27,7 +27,12 @@ from drf_yasg2 import openapi
 
 from filebrowser.sites import site
 
-from destinations.views import DestinationListApi, BannerListApi
+from destinations.views import (
+    DestinationListApi, 
+    BannerListApi, 
+    DestinationsApi,
+    DestinationRetrieveApi
+)
 from blog.views import (
     BlogTypeListApi,
     BlogRetrieveApi,
@@ -58,6 +63,7 @@ from packages.views import (
     PackageLuxuryApi,
     PackageTypeHomeApi,
     PackageTypeNavApi,
+    DestinationPackagesTop
 )
 
 from itineraries.views import ItineraryRetrieveApi
@@ -139,6 +145,13 @@ urlpatterns = [
         r"^redoc/$", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"
     ),
     path("destinations/", DestinationListApi.as_view(), name="destination-list"),
+    path("destinations/<str:slug>", DestinationRetrieveApi.as_view(), name="destiination-retrieve"),
+    # path("destination/<str:slug>/packages", DestinationPackages.as_view(), name="destiination-retrieve"),
+    path("destination/<str:slug>/packages/top/", DestinationPackagesTop.as_view(), name="destiination-retrieve"),
+
+
+    path("cities/all/", DestinationsApi.as_view(), name="destination-list-all"),
+
     path("banners/", BannerListApi.as_view(), name="banners-list"),
     path("notification/", NotificationListApi.as_view(), name="notification-list"),
     path(

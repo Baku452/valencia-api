@@ -239,3 +239,10 @@ class PackageLuxuryApi(generics.ListAPIView):
     serializer_class = PackageSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_class = PackageFilter
+
+class DestinationPackagesTop(APIView):
+    def get(self, request, slug):
+        packages = Package.objects.all().filter(published=True, destination__slug=slug)[:6]
+        serializer = PackageSerializer(packages, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
