@@ -11,7 +11,7 @@ class DestinationSerializer(serializers.ModelSerializer):
 class DestinationHomeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Destination
-        fields = ["id", "title", "sub_title", "slug", "active", "country"]
+        fields = ["id", "title", "sub_title", "slug", "active", "country","image","thumbnail"]
 
 
 class CountrySerializer(serializers.ModelSerializer):
