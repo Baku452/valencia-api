@@ -74,7 +74,6 @@ class Destination(models.Model):
         Country, default=None, related_name="destinations", on_delete=models.CASCADE
     )
 
-    tailor_made = models.BooleanField(default=False)
     active = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
