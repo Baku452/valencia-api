@@ -8,6 +8,7 @@ from imagekit.processors import ResizeToFill
 from destinations.models import Destination
 from django.core.validators import FileExtensionValidator
 from smart_selects.db_fields import ChainedForeignKey
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.core.files.storage import FileSystemStorage
 import os
 
@@ -215,7 +216,7 @@ class Notification(models.Model):
         populate_from="title", unique_with=["title"], always_update=True
     )
 
-    content = HTMLField()
+    content = RichTextUploadingField()
 
     keywords = models.TextField(default="")
 
