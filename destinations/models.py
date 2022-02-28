@@ -42,7 +42,9 @@ class Country(models.Model):
 
 class Destination(models.Model):
     title = models.CharField(max_length=255)
-
+    titleSEO = models.CharField(max_length=255, blank=True, null=True)
+    descriptionSEO = models.CharField(max_length=255, blank=True, null=True)
+    keywordsSEO = models.CharField(max_length=255, blank=True, null=True)
     sub_title = models.CharField(max_length=255, default="", blank=True)
 
     slug = AutoSlugField(
