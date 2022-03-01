@@ -26,6 +26,8 @@ class ContactUsAdmin(admin.ModelAdmin):
         "country_residence",
         "destination_interest",
         "description",
+        "typeClient",
+        "company",
         "is_newsletter",
     )
     pass
@@ -43,6 +45,8 @@ class ContactUsB2CAdmin(admin.ModelAdmin):
         "number",
         "city",
         "description",
+        "typeClient",
+        "company",
         "is_newsletter",
     )
     pass
