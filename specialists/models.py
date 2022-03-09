@@ -124,6 +124,8 @@ class TailorForm(models.Model):
     trip_type = models.CharField(max_length=255, default="")
     hear_about = models.CharField(max_length=255, default="")
     message = models.TextField(max_length=999, default="")
+    typeClient = models.TextField(max_length=255, default="")
+    company = models.TextField(max_length=255, default="")
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 

@@ -157,7 +157,7 @@ ul li {
 				<tr>
 					<td>
             <h2 class="heading">Web opportunity</h2>
-						<h3>Destination: {{destination_interest}}</h3>
+						<h3>Tailor Made</h3>
 					</td>
                 </tr>
                 <tr>
@@ -169,6 +169,22 @@ ul li {
                       </p>
                     </td>
                 </tr>
+                <tr>
+                  <td>
+                      <p>
+                          Type of Client: <strong>{{typeClient}}<strong>
+                    </p>
+                  </td>
+                </tr>
+                {% if company %}
+                <tr>
+                  <td>
+                      <p>
+                      Company: <strong>{{company}}<strong>
+                    </p>
+                  </td>
+                </tr>
+                {% endif %}
                 <tr>
                     <td>
                       <p>
@@ -190,6 +206,11 @@ ul li {
                       <p>
                         Accommodation: <strong>{{accommodation}} <strong>
                         
+                      </p>
+                    </td>
+                    <td>
+                      <p>
+            						Destination: {{destination_interest}}
                       </p>
                     </td>
                     <td>
@@ -248,7 +269,7 @@ ul li {
                 <tr>
                     <td>
                       <p class="detalles">
-						Description: <br/> 
+						            Description: <br/> 
                         {{message}}
                       </p>
                     </td>

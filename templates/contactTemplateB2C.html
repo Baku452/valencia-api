@@ -192,13 +192,15 @@ ul li {
                       </p>
                     </td>
                 </tr>
+				{% if company %}
 				<tr>
-                    <td>
-                        <p>
-                        Company: <strong>{{company}}<strong>
-                      </p>
-                    </td>
-                </tr>
+					<td>
+						<p>
+						Company: <strong>{{company}}<strong>
+			  			</p>
+					</td>
+				</tr>
+				{% endif %}
                 <tr>
                     <td>
                       <p>
