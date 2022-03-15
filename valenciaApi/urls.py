@@ -63,7 +63,8 @@ from packages.views import (
     PackageLuxuryApi,
     PackageTypeHomeApi,
     PackageTypeNavApi,
-    DestinationPackagesTop
+    DestinationPackagesTop,
+    PackageTypeRetrieve
 )
 
 from itineraries.views import ItineraryRetrieveApi
@@ -151,7 +152,7 @@ urlpatterns = [
 
 
     path("cities/all/", DestinationsApi.as_view(), name="destination-list-all"),
-
+    # path("destinations/", include('destinations.urls')),
     path("banners/", BannerListApi.as_view(), name="banners-list"),
     path("notification/", NotificationListApi.as_view(), name="notification-list"),
     path(
@@ -159,14 +160,17 @@ urlpatterns = [
         NotificationRetrieveApi.as_view(),
         name="notification-retrieve",
     ),
+    # Package Types
     path("packagestype/", PackageTypeListApi.as_view(), name="packages-type-list"),
-    path("packagestype/home/", PackageTypeHomeApi.as_view(), name="packages-type-list"),
-    path("packagestype/nav/", PackageTypeNavApi.as_view(), name="packages-type-list"),
+    path("packagestype/home/", PackageTypeHomeApi.as_view(), name="packages-type-home"),
+    path("packagestype/nav/", PackageTypeNavApi.as_view(), name="packages-type-nav"),
     path(
         "packagestype/<int:pk>",
         PackageTypeDetailApi.as_view(),
         name="packages-type-list",
     ),
+    path("packagestype/<str:slug>",PackageTypeRetrieve.as_view(),name="packages-type-retrieve"),
+    # Interest
     path("interests/", InterestListApi.as_view(), name="interest-list"),
     path("contact_us/", ContactCreateApi.as_view(), name="contact_us-create"),
     path("contact_b2c/", ContactB2CCreateApi.as_view(), name="contact_b2c-create"),

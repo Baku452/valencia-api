@@ -27,6 +27,7 @@ from .serializers import (
     PackageHomeSerializer,
     PackageTypeNavSerializer,
     PackageTypeHomeSerializer,
+    PackageTypeRetrieveSerializer
 )
 
 from rest_framework import generics
@@ -43,6 +44,12 @@ def get_object_notify(slug):
 def get_object(slug):
     try:
         return Package.objects.get(slug=slug)
+    except Package.DoesNotExist:
+        raise Http404
+
+def get_object_package_type(slug):
+    try:
+        return PackageType.objects.get(slug=slug)
     except Package.DoesNotExist:
         raise Http404
 
@@ -74,6 +81,13 @@ class NotificationListApi(APIView):
         serializer = NotificationSerializer(notifications, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+#Package Type CRUD
+
+class PackageTypeRetrieve(APIView):
+    def get(self, request, slug):
+        packageType = get_object_package_type(slug)
+        serializer = PackageTypeRetrieveSerializer(packageType)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 class PackageTypeListApi(APIView):
     def get(self, request):
@@ -102,6 +116,7 @@ class PackageTypeDetailApi(APIView):
         serializer = PackageDetailTypesSerializer(package)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+#Interest CRUD
 
 class InterestListApi(APIView):
     def get(self, request):
@@ -143,14 +158,6 @@ class PackageOptionalTours(APIView):
         packages = Package.objects.all().filter(optional=True)
         serializer = PackageSerializer(packages, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
-
-
-# class PackagePromoTours(APIView):
-#     def get(self, request):
-#         id=2
-#         packages = Package.objects.all().exclude(id__in=package_type__contains)
-#         serializer = PackageSerializer(packages, many=True)
-#         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class OptionalRentingApi(APIView):

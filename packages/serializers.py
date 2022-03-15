@@ -17,6 +17,11 @@ from itineraries.serializers import (
     DatesAndPricesSerializer,
 )
 
+#Serializer Package Type
+class PackageTypeRetrieveSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PackageType
+        fields = "__all__"
 
 class OptionalRentingImageSerializer(serializers.ModelSerializer):
     class Meta:
