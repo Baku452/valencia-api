@@ -99,7 +99,7 @@ class PackageTypeHomeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PackageType
-        fields = ["id", "thumbnail", "title", "content", "svg"]
+        fields = ["id", "slug","thumbnail", "title", "content", "svg"]
 
 
 class PackageTypeNavSerializer(serializers.ModelSerializer):
