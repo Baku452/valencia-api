@@ -44,7 +44,7 @@ class ContactUsB2CAdmin(admin.ModelAdmin):
         "state",
         "number",
         "city",
-        "description",
+        "message",
         "typeClient",
         "company",
         "is_newsletter",

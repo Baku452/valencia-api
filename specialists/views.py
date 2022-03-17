@@ -56,7 +56,6 @@ class ContactB2CCreateApi(APIView):
         serializer = ContactUsB2CSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
-            print(serializer.data["is_promo"])
             send_mail(
                 subjectB2C + serializer.data["package"],
                 plain_message,

@@ -71,7 +71,7 @@ class ContactUsB2C(models.Model):
     city = models.CharField(max_length=255, default="")
     number = models.CharField(max_length=255, default="")
     package = models.CharField(max_length=255, default="")
-    description = models.TextField(max_length=999, default="")
+    message = models.TextField(max_length=999, default="")
     extra_data = models.TextField(max_length=999, default="")
     typeClient = models.TextField(max_length=255, default="")
     company = models.TextField(max_length=255, default="")
