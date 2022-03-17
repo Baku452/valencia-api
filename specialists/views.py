@@ -21,7 +21,7 @@ from .serializers import (
 )
 
 subject = "Web Opportunity "
-subjectTailor = "Web Oppotunity Tailor Made"
+subjectTailor = "Web Opportunity Tailor Made"
 subjectB2CPromo = "Promo Web Opportunity B2C "
 subjectB2C = "Web Opportunity B2C "
 subjectB2BPromo = "Promo Web Opportunity B2B "
