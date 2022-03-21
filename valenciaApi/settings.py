@@ -216,29 +216,29 @@ TINYMCE_DEFAULT_CONFIG = {
 #     'filters': ['special']
 #     }
 # }
-LOGGING = {
-   'version': 1,
-   'disable_existing_loggers': False,
-   'handlers': {
-      'file': {
-         'level': 'DEBUG',
-         'class': 'logging.FileHandler',
-         "filename": os.path.join(BASE_DIR, 'logs/debug.log')
-      },
-   },
-   'loggers': {
-      '': {
-         'handlers': ['file'],
-         'level': 'WARNING',
-         'propagate': True,
-      },
-    #   'django': {
-    #      'handlers': ['file'],
-    #      'level': 'WARNING',
-    #      'propagate': True,
-    #   },
-   },
-}
+# LOGGING = {
+#    'version': 1,
+#    'disable_existing_loggers': False,
+#    'handlers': {
+#       'file': {
+#          'level': 'DEBUG',
+#          'class': 'logging.FileHandler',
+#          "filename": os.path.join(BASE_DIR, 'logs/debug.log')
+#       },
+#    },
+#    'loggers': {
+#       '': {
+#          'handlers': ['file'],
+#          'level': 'WARNING',
+#          'propagate': True,
+#       },
+#     #   'django': {
+#     #      'handlers': ['file'],
+#     #      'level': 'WARNING',
+#     #      'propagate': True,
+#     #   },
+#    },
+# }
 
 STATIC_URL = "/static_root/"
 STATICFILES_DIRS = [
