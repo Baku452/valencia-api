@@ -1,4 +1,5 @@
 import os
+import logging
 from dotenv import load_dotenv
 
 load_dotenv(override=True)
@@ -20,6 +21,7 @@ from .serializers import (
     TailorFormSerializer,
 )
 
+logger = logging.getLogger(__name__)
 subject = "Web Opportunity "
 subjectTailor = "Web Opportunity Tailor Made"
 subjectB2CPromo = "Promo Web Opportunity B2C "
@@ -54,7 +56,7 @@ class ContactCreateApi(APIView):
 class ContactB2CCreateApi(APIView):
     def post(self, request):
         serializer = ContactUsB2CSerializer(data=request.data)
-        if serializer.is_valid(raise_exception=True):
+        if serializer.is_valid():
             serializer.save()
             send_mail(
                 subjectB2C + serializer.data["package"],
@@ -68,8 +70,27 @@ class ContactB2CCreateApi(APIView):
                     "contactTemplateB2C.html", serializer.data
                 ),
             )
-            # send_mail(subjectB2C+serializer.data['package'], plain_message,serializer.data['first_name']+ ' '+serializer.data['last_name']+from_email, [to], html_message=render_to_string('contactTemplateB2C.html', serializer.data))
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            logger.warning('Error creating B2C contact \n'
+            +str(serializer.data["first_name"]) +" \n"
+            +str(serializer.data["last_name"]) +" \n"
+            +str(serializer.data["email"]) +" \n"
+            +str(serializer.data["message"]) +" \n"
+            +str(serializer.errors))
+            send_mail(
+                "Error Django Contact B2C",
+                str(serializer.data["package"]) +"\n"
+                +str(serializer.data["first_name"])  +" \n"
+                +str(serializer.data["last_name"]) +" \n"
+                +str(serializer.data["email"]) +" \n"
+                +str(serializer.data["message"]) +" \n"
+                + "Errors :" + "\n"
+                +str(serializer.errors) +" \n"
+                ,
+                from_email,
+                [from_email],
+            )
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 

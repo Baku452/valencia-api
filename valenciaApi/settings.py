@@ -197,6 +197,49 @@ TINYMCE_DEFAULT_CONFIG = {
 }
 # TINYMCE_FILEBROWSER = False
 
+#LOGGING
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         'console': {
+#             'class': 'logging.StreamHandler',
+#         },
+#     },
+#     'root': {
+#         'handlers': ['console'],
+#         'level': 'WARNING',
+#     },
+#     'mail_admins': {
+#     'level': 'ERROR',
+#     'class': 'django.utils.log.AdminEmailHandler',
+#     'filters': ['special']
+#     }
+# }
+LOGGING = {
+   'version': 1,
+   'disable_existing_loggers': False,
+   'handlers': {
+      'file': {
+         'level': 'DEBUG',
+         'class': 'logging.FileHandler',
+         "filename": os.path.join(BASE_DIR, 'logs/debug.log')
+      },
+   },
+   'loggers': {
+      '': {
+         'handlers': ['file'],
+         'level': 'WARNING',
+         'propagate': True,
+      },
+    #   'django': {
+    #      'handlers': ['file'],
+    #      'level': 'WARNING',
+    #      'propagate': True,
+    #   },
+   },
+}
+
 STATIC_URL = "/static_root/"
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
