@@ -13,8 +13,6 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-
-
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
@@ -160,17 +158,9 @@ urlpatterns = [
         NotificationRetrieveApi.as_view(),
         name="notification-retrieve",
     ),
-    # Package Types
-    path("packagestype/", PackageTypeListApi.as_view(), name="packages-type-list"),
-    path("packagestype/home/", PackageTypeHomeApi.as_view(), name="packages-type-home"),
-    path("packagestype/nav/", PackageTypeNavApi.as_view(), name="packages-type-nav"),
-    path(
-        "packagestype/<int:pk>",
-        PackageTypeDetailApi.as_view(),
-        name="packages-type-list",
-    ),
-    path("packagestype/<str:slug>",PackageTypeRetrieve.as_view(),name="packages-type-retrieve"),
-    # Interest
+    #Package View
+    path('packages/', include('packages.urls')),
+
     path("interests/", InterestListApi.as_view(), name="interest-list"),
     path("contact_us/", ContactCreateApi.as_view(), name="contact_us-create"),
     path("contact_b2c/", ContactB2CCreateApi.as_view(), name="contact_b2c-create"),
@@ -182,24 +172,7 @@ urlpatterns = [
         NewsletterDetailApi.as_view(),
         name="newsletter-detail",
     ),
-    path("packages/home/", PackageHomeListApi.as_view(), name="packages-search"),
-    path("packages/", PackageSearchApi.as_view(), name="packages-search"),
-    path("packages/titles/", PackageTitleApi.as_view(), name="packages-titles"),
-    path("packages/list/", PackageListApi.as_view(), name="packages-list"),
-    path(
-        "packages/optional/",
-        PackageOptionalSearchApi.as_view(),
-        name="packages-optional",
-    ),
-    path("packages/promo/", PackagePromoSearchApi.as_view(), name="packages-promo"),
-    path("packages/luxury/", PackageLuxuryApi.as_view(), name="packages-luxury"),
-    path(
-        "packages/promo/adventure/",
-        PackagePromoAdventureSearchApi.as_view(),
-        name="packages-promo",
-    ),
-    path("experiences/list/", ExperienceListApi.as_view(), name="experiences-list"),
-    path("package/<str:slug>", PackageRetrieveApi.as_view(), name="packages-retrieve"),
+    path("experiences/list/", ExperienceListApi.as_view(), name="experiences-list"),    
     path(
         "itineraries/<int:pk>",
         ItineraryRetrieveApi.as_view(),
