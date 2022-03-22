@@ -47,6 +47,7 @@ class ContactUs(models.Model):
     email = models.EmailField(max_length=255, default="")
     country = models.CharField(max_length=255, default="")
     destination_interest = models.CharField(max_length=255, default="")
+    package = models.CharField(max_length=255, default="", blank = True, null = True)
     phone = models.CharField(max_length=255, default="")
     message = models.TextField(max_length=999, default="")
     typeClient = models.TextField(max_length=255, default="")
