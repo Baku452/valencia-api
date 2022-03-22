@@ -10,6 +10,7 @@ urlpatterns = [
     path("optional/",views.PackageOptionalSearchApi.as_view(),name="packages-optional",),
     path("promo/", views.PackagePromoSearchApi.as_view(), name="packages-promo"),
     path("luxury/", views.PackageLuxuryApi.as_view(), name="packages-luxury"),
+    path("top/<int:id>",views.PackagesTop.as_view(),name="packages-top",),
     path("promo/adventure/",views.PackagePromoAdventureSearchApi.as_view(),name="packages-promo",),
     #Package Types
     path("types/<str:slug>",views.PackageTypeRetrieve.as_view(),name="packages-type-retrieve"),

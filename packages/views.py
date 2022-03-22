@@ -174,6 +174,7 @@ class NumberInFilter(filters.BaseInFilter, filters.NumberFilter):
 class CharInFilter(filters.BaseInFilter, filters.CharFilter):
     pass
 
+#Package Views
 
 class PackageFilter(filters.FilterSet):
     destination = NumberInFilter(field_name="destination", lookup_expr="in")
@@ -246,6 +247,13 @@ class PackageLuxuryApi(generics.ListAPIView):
     serializer_class = PackageSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_class = PackageFilter
+
+class PackagesTop(generics.ListAPIView):
+    serializer_class = PackageTitleSerializer
+    def get_queryset(self):
+        idCountry = self.kwargs.get('id')
+        queryset = Package.objects.filter(published=True, destination__id=idCountry).order_by('-rating')[:5]
+        return queryset
 
 class DestinationPackagesTop(APIView):
     def get(self, request, slug):
