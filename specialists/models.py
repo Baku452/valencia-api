@@ -9,6 +9,7 @@ class Specialist(models.Model):
     fullname = models.CharField(max_length=255, default="")
     content = HTMLField()
     email = models.EmailField(max_length=255, default="")
+    calendly = models.CharField(max_length=255, default="", blank = True, null = True)
     thumbnail = ProcessedImageField(
         upload_to="specialist-thumbnail",
         processors=[ResizeToFill(200, 200)],
