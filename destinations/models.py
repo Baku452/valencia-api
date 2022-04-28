@@ -174,6 +174,15 @@ class LandingPackage(models.Model):
         null=True,
     )
 
+    specialist = models.ForeignKey(
+        'specialists.Specialist',
+        related_name="specialist_landing",
+        default=None,
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE,
+    )
+
     active = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

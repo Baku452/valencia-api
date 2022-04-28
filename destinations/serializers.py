@@ -1,6 +1,6 @@
 from .models import Country, Banner, Destination, LandingPackage, LandingImages
 from rest_framework import serializers
-from packages.serializers import PackageLandingSerializer
+from packages.serializers import PackageLandingSerializer, SpecialistSerializer
 
 class DestinationSerializer(serializers.ModelSerializer):
     class Meta:
@@ -45,6 +45,7 @@ class LandingImageSerializer(serializers.ModelSerializer):
 class LandingRetrieveSerializer(serializers.ModelSerializer):
     images = LandingImageSerializer(many=True, read_only=True)
     package = PackageLandingSerializer()
+    specialist = SpecialistSerializer()
     class Meta:
         model = LandingPackage
         fields = "__all__"
