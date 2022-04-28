@@ -354,6 +354,12 @@ class Package(models.Model):
         options={"quality": 100},
         blank=True,
     )
+    image = ProcessedImageField(
+        upload_to=path_and_rename,
+        format="JPEG",
+        options={"quality": 100},
+        blank=True,
+    )
     optional_forRenting = models.ManyToManyField(OptionalRenting, blank=True)
     incatrail = models.BooleanField(default=False)
     published = models.BooleanField(default=False)

@@ -257,7 +257,7 @@ class PackagesTop(generics.ListAPIView):
 
 class DestinationPackagesTop(APIView):
     def get(self, request, slug):
-        packages = Package.objects.all().filter(published=True, destination__slug=slug)[:6]
+        packages = Package.objects.all().filter(published=True, destination__slug=slug).order_by('-rating')[:6]
         serializer = PackageSerializer(packages, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 

@@ -42,28 +42,6 @@ from blog.views import (
     BlogPopular,
 )
 
-from packages.views import (
-    PackageTypeListApi,
-    PackageSearchApi,
-    PackageRetrieveApi,
-    PackageTypeDetailApi,
-    PackageHomeListApi,
-    PackageListApi,
-    PackageOptionalTours,
-    ExperienceListApi,
-    InterestListApi,
-    NotificationListApi,
-    NotificationRetrieveApi,
-    PackageOptionalSearchApi,
-    PackageTitleApi,
-    PackagePromoSearchApi,
-    PackagePromoAdventureSearchApi,
-    PackageLuxuryApi,
-    PackageTypeHomeApi,
-    PackageTypeNavApi,
-    DestinationPackagesTop,
-    PackageTypeRetrieve
-)
 
 from itineraries.views import ItineraryRetrieveApi
 
@@ -105,6 +83,8 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
+from packages.views import NotificationListApi, NotificationRetrieveApi, InterestListApi, ExperienceListApi
+
 
 DIRECTORY = getattr(settings, "FILEBROWSER_DIRECTORY", "uploads/")
 schema_view = get_schema_view(
@@ -143,23 +123,14 @@ urlpatterns = [
     url(
         r"^redoc/$", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"
     ),
-    path("destinations/", DestinationListApi.as_view(), name="destination-list"),
-    path("destinations/<str:slug>", DestinationRetrieveApi.as_view(), name="destiination-retrieve"),
-    # path("destination/<str:slug>/packages", DestinationPackages.as_view(), name="destiination-retrieve"),
-    path("destination/<str:slug>/packages/top/", DestinationPackagesTop.as_view(), name="destiination-retrieve"),
+   
+    #Destinations
+    path('destinations/', include('destinations.urls')),
 
-
-    path("cities/all/", DestinationsApi.as_view(), name="destination-list-all"),
-    # path("destinations/", include('destinations.urls')),
-    path("banners/", BannerListApi.as_view(), name="banners-list"),
-    path("notification/", NotificationListApi.as_view(), name="notification-list"),
-    path(
-        "notification/<str:slug>",
-        NotificationRetrieveApi.as_view(),
-        name="notification-retrieve",
-    ),
     #Package View
     path('packages/', include('packages.urls')),
+    path("notification/", NotificationListApi.as_view(), name="notification-list"),
+    path("notification/<str:slug>",NotificationRetrieveApi.as_view(),name="notification-retrieve",),
 
     path("interests/", InterestListApi.as_view(), name="interest-list"),
     path("contact_us/", ContactCreateApi.as_view(), name="contact_us-create"),
@@ -167,22 +138,10 @@ urlpatterns = [
     path("contact_b2b/", ContactB2BCreateApi.as_view(), name="contact_b2b-create"),
     path("tailorForm/", TailorMadeCreateApi.as_view(), name="tailorForm-create"),
     path("newsletter/", NewsletterListApi.as_view(), name="newsletter-create"),
-    path(
-        "newsletter/<str:email>",
-        NewsletterDetailApi.as_view(),
-        name="newsletter-detail",
-    ),
+    path("newsletter/<str:email>",NewsletterDetailApi.as_view(),name="newsletter-detail",),
     path("experiences/list/", ExperienceListApi.as_view(), name="experiences-list"),    
-    path(
-        "itineraries/<int:pk>",
-        ItineraryRetrieveApi.as_view(),
-        name="itineraries-retrieve",
-    ),
-    path(
-        "old_itinerario/<int:pk>",
-        ItineraryOldRetrieveApi.as_view(),
-        name="itinerariesOld-retrieve",
-    ),
+    path("itineraries/<int:pk>",ItineraryRetrieveApi.as_view(),name="itineraries-retrieve",),
+    path("old_itinerario/<int:pk>",ItineraryOldRetrieveApi.as_view(),name="itinerariesOld-retrieve",),
     path("tailors/list/", TailorListApi.as_view(), name="tailors-retrieve"),
     path("ourpurpose/list/", OurPurposeListApi.as_view(), name="ourpurpose-retrieve"),
     path("history/", HistoryApi.as_view(), name="history-retrieve"),
@@ -198,11 +157,7 @@ urlpatterns = [
     path("pages/list/", PageListApi.as_view(), name="page-SLUG"),
     path("pages/<str:slug>", PageApi.as_view(), name="page-list"),
     path("collaborators/", CollaboratorsListApi.as_view(), name="collaborators-list"),
-    path(
-        "collaborators/<str:slug>",
-        CollaboratorRetrieveApi.as_view(),
-        name="collaborators-retrievet",
-    ),
+    path("collaborators/<str:slug>",CollaboratorRetrieveApi.as_view(),name="collaborators-retrievet",),
     path("tripadvisorReviews/", TripadvisorReviewAPI.as_view(), name="trip-advisor"),
     path("awardslist/", AwardsListApi.as_view(), name="award-list"),
     path("press-posts/", PressPostsListApi.as_view(), name="press-list"),

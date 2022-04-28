@@ -138,6 +138,13 @@ class PackageDetailSerializer(serializers.ModelSerializer):
         model = Package
         fields = "__all__"
 
+class PackageLandingSerializer(serializers.ModelSerializer):
+
+    itineraries = ItinerarySerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Package
+        fields = ["id", "slug", "title", "summary","fixedDepartures", "price","days","description", "highligths" , "itineraries" ,"videoURL", "whats_not_included", "whats_included" ,"itineraries"]
 
 class PackageDetailTypesSerializer(serializers.ModelSerializer):
 

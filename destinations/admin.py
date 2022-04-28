@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Banner, Country, Destination
+from .models import Banner, Country, Destination, LandingPackage, LandingImages
 from adminsortable2.admin import SortableAdminMixin
 
 
@@ -21,5 +21,20 @@ class CountryAdmin(admin.ModelAdmin):
 class DestinationAdmin(SortableAdminMixin, admin.ModelAdmin):
     list_display = ('title', 'sub_title', 'country', 'active')
     search_fields = ('title', 'sub_title', 'country__name')
+    pass
+
+class LandingImageAdmin(admin.TabularInline):
+    model = LandingImages
+    extra = 0
+    fields = ["image", "title", "alt", "image_tag"]
+    readonly_fields = ["image_tag"]
+    inlines = ""
+
+@admin.register(LandingPackage)
+class LandingPackageAdmin(SortableAdminMixin, admin.ModelAdmin):
+    search_fields = ('title', 'sub_title', 'country__name')
+    inlines = [
+        LandingImageAdmin
+    ]
     pass
 
