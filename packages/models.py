@@ -354,7 +354,7 @@ class Package(models.Model):
         options={"quality": 100},
         blank=True,
     )
-    image = ProcessedImageField(
+    landing_image = ProcessedImageField(
         upload_to=path_and_rename,
         format="JPEG",
         options={"quality": 100},
