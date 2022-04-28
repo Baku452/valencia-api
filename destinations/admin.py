@@ -33,8 +33,11 @@ class LandingImageAdmin(admin.TabularInline):
 @admin.register(LandingPackage)
 class LandingPackageAdmin(SortableAdminMixin, admin.ModelAdmin):
     search_fields = ('title', 'sub_title', 'country__name')
+    readonly_fields = ("slug", "created", "URL")
     inlines = [
         LandingImageAdmin
     ]
-    pass
+    @property
+    def combined(self):
+        return self.slug + self.created
 

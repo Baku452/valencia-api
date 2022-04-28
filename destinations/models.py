@@ -190,7 +190,10 @@ class LandingPackage(models.Model):
     class Meta:
         db_table = "landing_package"
         ordering = ["order"]
-
+    @property
+    def URL(self):
+        destName = self.destination.slug
+        return os.getenv("NEXTJS_DOMAIN") + "/destinations/%s/%s" % (destName, self.slug)
     def __str__(self):
         return self.title
 
